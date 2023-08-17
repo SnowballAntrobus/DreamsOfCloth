@@ -14,7 +14,8 @@
 		F39D06AD2A8C76AD00B6F599 /* DreamsOfClothTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06AC2A8C76AD00B6F599 /* DreamsOfClothTests.swift */; };
 		F39D06B72A8C76AD00B6F599 /* DreamsOfClothUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06B62A8C76AD00B6F599 /* DreamsOfClothUITests.swift */; };
 		F39D06B92A8C76AD00B6F599 /* DreamsOfClothUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06B82A8C76AD00B6F599 /* DreamsOfClothUITestsLaunchTests.swift */; };
-		F39D06CA2A8C7E7600B6F599 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06C92A8C7E7600B6F599 /* Camera.swift */; };
+		F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06C92A8C7E7600B6F599 /* CameraModel.swift */; };
+		F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +46,8 @@
 		F39D06B22A8C76AD00B6F599 /* DreamsOfClothUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DreamsOfClothUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39D06B62A8C76AD00B6F599 /* DreamsOfClothUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothUITests.swift; sourceTree = "<group>"; };
 		F39D06B82A8C76AD00B6F599 /* DreamsOfClothUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		F39D06C92A8C7E7600B6F599 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		F39D06C92A8C7E7600B6F599 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
+		F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +135,8 @@
 		F39D06C82A8C7DF300B6F599 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				F39D06C92A8C7E7600B6F599 /* Camera.swift */,
+				F39D06C92A8C7E7600B6F599 /* CameraModel.swift */,
+				F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -270,7 +273,8 @@
 			files = (
 				F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */,
 				F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */,
-				F39D06CA2A8C7E7600B6F599 /* Camera.swift in Sources */,
+				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,
+				F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

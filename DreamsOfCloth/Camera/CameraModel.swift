@@ -1,5 +1,5 @@
 //
-//  Camera.swift
+//  CameraModel.swift
 //  DreamsOfCloth
 //
 //  Adapted by Dante Gil-Marin on 8/15/23 from:
@@ -10,28 +10,39 @@ import UIKit
 import AVFoundation
 import os.log
 
-class Camera: NSObject {
+class CameraModel: NSObject {
     private let captureSession = AVCaptureSession()
     private var sessionQueue: DispatchQueue!
     private var isCaptureSessionConfigured = false
     private var deviceInput: AVCaptureDeviceInput?
-    private var photoOutput: AVCapturePhotoOutput?
     private var videoOutput: AVCaptureVideoDataOutput?
+    private var photoOutput: AVCapturePhotoOutput?
 
     
     private var captureDevice: AVCaptureDevice? {
         didSet {
             guard let captureDevice = captureDevice else { return }
             logger.debug("Using capture device: \(captureDevice.localizedName)")
-            sessionQueue.async {
-                self.updateSessionForCaptureDevice(captureDevice)
-            }
         }
     }
     
     var isRunning: Bool {
         captureSession.isRunning
     }
+    
+    private var addToPreviewStream: ((CIImage) -> Void)?
+    
+    var isPreviewPaused = false
+    
+    lazy var previewStream: AsyncStream<CIImage> = {
+        AsyncStream { continuation in
+            addToPreviewStream = { ciImage in
+                if !self.isPreviewPaused {
+                    continuation.yield(ciImage)
+                }
+            }
+        }
+    }()
     
     override init() {
         super.init()
@@ -44,6 +55,10 @@ class Camera: NSObject {
         captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
     }
     
+    private var deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait;
+    
+    private var videoOrientation: AVCaptureVideoOrientation = AVCaptureVideoOrientation.portrait;
+    
     private func deviceInputFor(_ device: AVCaptureDevice?) -> AVCaptureDeviceInput? {
         guard let validDevice = device else { return nil }
         do {
@@ -51,26 +66,6 @@ class Camera: NSObject {
         } catch let error {
             logger.error("Error getting capture device input: \(error.localizedDescription)")
             return nil
-        }
-    }
-    
-    
-    private func updateSessionForCaptureDevice (_ captureDevice: AVCaptureDevice) {
-        guard isCaptureSessionConfigured else { return }
-        
-        captureSession.beginConfiguration()
-        defer { captureSession.commitConfiguration() }
-        
-        for input in captureSession.inputs {
-            if let deviceInput = input as? AVCaptureDeviceInput {
-                captureSession.removeInput(deviceInput)
-            }
-        }
-        
-        if let deviceInput = deviceInputFor(captureDevice) {
-            if !captureSession.inputs.contains(deviceInput), captureSession.canAddInput(deviceInput) {
-                captureSession.addInput(deviceInput)
-            }
         }
     }
     
@@ -159,6 +154,9 @@ class Camera: NSObject {
         
         photoOutput.maxPhotoQualityPrioritization = .quality
         
+        let videoOutputConnection = videoOutput.connection(with: .video)
+        videoOutputConnection?.isVideoMirrored = false
+        
         isCaptureSessionConfigured = true
         
         success = true
@@ -221,6 +219,14 @@ class Camera: NSObject {
                 photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoPixelFormatType]
             }
             
+            photoSettings.photoQualityPrioritization = .balanced
+            
+            if let photoOutputVideoConnection = photoOutput.connection(with: .video) {
+                if photoOutputVideoConnection.isVideoOrientationSupported {
+                    photoOutputVideoConnection.videoOrientation = self.videoOrientation
+                }
+            }
+            
             photoOutput.capturePhoto(with: photoSettings, delegate: self)
         }
     }
@@ -228,10 +234,22 @@ class Camera: NSObject {
     
 }
 
-extension Camera: AVCapturePhotoCaptureDelegate {
+extension CameraModel: AVCapturePhotoCaptureDelegate {
 }
 
-extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension CameraModel: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        guard let pixelBuffer = sampleBuffer.imageBuffer else { return }
+        
+        if connection.isVideoOrientationSupported {
+            connection.videoOrientation = videoOrientation
+        }
+        
+        addToPreviewStream?(CIImage(cvPixelBuffer: pixelBuffer))
+    }
 }
+
+
 
 fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.camera", category: "CameraModel")
