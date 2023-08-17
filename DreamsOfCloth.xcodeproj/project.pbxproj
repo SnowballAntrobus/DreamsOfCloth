@@ -16,6 +16,8 @@
 		F39D06B92A8C76AD00B6F599 /* DreamsOfClothUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06B82A8C76AD00B6F599 /* DreamsOfClothUITestsLaunchTests.swift */; };
 		F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06C92A8C7E7600B6F599 /* CameraModel.swift */; };
 		F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */; };
+		F39D06D02A8DE51B00B6F599 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06CF2A8DE51B00B6F599 /* CameraView.swift */; };
+		F39D06D22A8DE55200B6F599 /* ViewfinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		F39D06B82A8C76AD00B6F599 /* DreamsOfClothUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F39D06C92A8C7E7600B6F599 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureModel.swift; sourceTree = "<group>"; };
+		F39D06CF2A8DE51B00B6F599 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewfinderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,8 @@
 			children = (
 				F39D06C92A8C7E7600B6F599 /* CameraModel.swift */,
 				F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */,
+				F39D06CF2A8DE51B00B6F599 /* CameraView.swift */,
+				F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -272,8 +278,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */,
+				F39D06D22A8DE55200B6F599 /* ViewfinderView.swift in Sources */,
 				F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,
+				F39D06D02A8DE51B00B6F599 /* CameraView.swift in Sources */,
 				F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

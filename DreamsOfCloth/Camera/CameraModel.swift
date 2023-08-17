@@ -196,46 +196,46 @@ class CameraModel: NSObject {
         }
     }
     
-    func takePhoto() {
-        guard let photoOutput = self.photoOutput else { return }
-        
-        sessionQueue.async {
-            var photoSettings = AVCapturePhotoSettings()
-            
-            // TODO: Determine if this is the best codec for usecase
-            if photoOutput.availablePhotoCodecTypes.contains(.hevc) {
-                photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
-            }
-            
-            let isFlashAvailable = self.deviceInput?.device.isFlashAvailable ?? false
-            photoSettings.flashMode = isFlashAvailable ? .auto : .off
-            
-            let maxPhotoDimensions = self.getMaxPhotoDimensions()
-            guard let maxPhotoDimensions = maxPhotoDimensions else { return }
-            photoSettings.maxPhotoDimensions = maxPhotoDimensions
-            
-            // TODO: Determine if this is the best pixel format for usecase (might not matter since it is for preview)
-            if let previewPhotoPixelFormatType = photoSettings.availablePreviewPhotoPixelFormatTypes.first {
-                photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoPixelFormatType]
-            }
-            
-            photoSettings.photoQualityPrioritization = .balanced
-            
-            if let photoOutputVideoConnection = photoOutput.connection(with: .video) {
-                if photoOutputVideoConnection.isVideoOrientationSupported {
-                    photoOutputVideoConnection.videoOrientation = self.videoOrientation
-                }
-            }
-            
-            photoOutput.capturePhoto(with: photoSettings, delegate: self)
-        }
-    }
+//    func takePhoto() {
+//        guard let photoOutput = self.photoOutput else { return }
+//
+//        sessionQueue.async {
+//            var photoSettings = AVCapturePhotoSettings()
+//
+//            // TODO: Determine if this is the best codec for usecase
+//            if photoOutput.availablePhotoCodecTypes.contains(.hevc) {
+//                photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+//            }
+//
+//            let isFlashAvailable = self.deviceInput?.device.isFlashAvailable ?? false
+//            photoSettings.flashMode = isFlashAvailable ? .auto : .off
+//
+//            let maxPhotoDimensions = self.getMaxPhotoDimensions()
+//            guard let maxPhotoDimensions = maxPhotoDimensions else { return }
+//            photoSettings.maxPhotoDimensions = maxPhotoDimensions
+//
+//            // TODO: Determine if this is the best pixel format for usecase (might not matter since it is for preview)
+//            if let previewPhotoPixelFormatType = photoSettings.availablePreviewPhotoPixelFormatTypes.first {
+//                photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoPixelFormatType]
+//            }
+//
+//            photoSettings.photoQualityPrioritization = .balanced
+//
+//            if let photoOutputVideoConnection = photoOutput.connection(with: .video) {
+//                if photoOutputVideoConnection.isVideoOrientationSupported {
+//                    photoOutputVideoConnection.videoOrientation = self.videoOrientation
+//                }
+//            }
+//
+//            photoOutput.capturePhoto(with: photoSettings, delegate: self)
+//        }
+//    }
     
     
 }
 
-extension CameraModel: AVCapturePhotoCaptureDelegate {
-}
+//extension CameraModel: AVCapturePhotoCaptureDelegate {
+//}
 
 extension CameraModel: AVCaptureVideoDataOutputSampleBufferDelegate {
     
