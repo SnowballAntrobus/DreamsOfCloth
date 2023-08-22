@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F39D06982A8C76AC00B6F599 /* DreamsOfCloth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsOfCloth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothApp.swift; sourceTree = "<group>"; };
 		F39D069D2A8C76AC00B6F599 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		F39D069A2A8C76AC00B6F599 /* DreamsOfCloth */ = {
 			isa = PBXGroup;
 			children = (
+				F31CA9B42A946A6C001A9807 /* Info.plist */,
 				F39D06C82A8C7DF300B6F599 /* Camera */,
 				F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */,
 				F39D069D2A8C76AC00B6F599 /* ContentView.swift */,
@@ -444,6 +446,9 @@
 				DEVELOPMENT_TEAM = 8QAU9CM882;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DreamsOfCloth/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DreamsOfCloth;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -452,7 +457,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = .1;
 				PRODUCT_BUNDLE_IDENTIFIER = musa.DreamsOfCloth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -472,6 +477,9 @@
 				DEVELOPMENT_TEAM = 8QAU9CM882;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DreamsOfCloth/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DreamsOfCloth;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -480,7 +488,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = .1;
 				PRODUCT_BUNDLE_IDENTIFIER = musa.DreamsOfCloth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

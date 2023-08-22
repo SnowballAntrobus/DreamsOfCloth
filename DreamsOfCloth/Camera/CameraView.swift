@@ -20,6 +20,5 @@ struct CameraView: View {
         .task {
             await model.camera.start()
         }
-//        .ignoresSafeArea()
     }
 }
