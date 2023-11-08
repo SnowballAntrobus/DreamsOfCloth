@@ -152,6 +152,7 @@ class CameraModel: NSObject {
         guard let maxPhotoDimensions = maxPhotoDimensions else { return }
         photoOutput.maxPhotoDimensions = maxPhotoDimensions
         
+        // is optical image stabilization on?
         photoOutput.maxPhotoQualityPrioritization = .quality
         
         let videoOutputConnection = videoOutput.connection(with: .video)

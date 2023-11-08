@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F39570232AFB451300139AF2 /* todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F39570222AFB451300139AF2 /* todo.rtf */; };
 		F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */; };
 		F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069D2A8C76AC00B6F599 /* ContentView.swift */; };
 		F39D06A02A8C76AD00B6F599 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39D069F2A8C76AD00B6F599 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F39570222AFB451300139AF2 /* todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = todo.rtf; sourceTree = "<group>"; };
 		F39D06982A8C76AC00B6F599 /* DreamsOfCloth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsOfCloth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothApp.swift; sourceTree = "<group>"; };
 		F39D069D2A8C76AC00B6F599 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				F39D069D2A8C76AC00B6F599 /* ContentView.swift */,
 				F39D069F2A8C76AD00B6F599 /* Assets.xcassets */,
 				F39D06A12A8C76AD00B6F599 /* Preview Content */,
+				F39570222AFB451300139AF2 /* todo.rtf */,
 			);
 			path = DreamsOfCloth;
 			sourceTree = "<group>";
@@ -213,7 +216,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					F39D06972A8C76AC00B6F599 = {
 						CreatedOnToolsVersion = 14.2;
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39D06A32A8C76AD00B6F599 /* Preview Assets.xcassets in Resources */,
+				F39570232AFB451300139AF2 /* todo.rtf in Resources */,
 				F39D06A02A8C76AD00B6F599 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +329,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -357,6 +362,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -385,6 +391,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -417,6 +424,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -449,9 +457,11 @@
 				INFOPLIST_FILE = DreamsOfCloth/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DreamsOfCloth;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to capture images of items";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -480,9 +490,11 @@
 				INFOPLIST_FILE = DreamsOfCloth/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = DreamsOfCloth;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to capture images of items";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
