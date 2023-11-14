@@ -19,6 +19,7 @@
 		F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */; };
 		F39D06D02A8DE51B00B6F599 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06CF2A8DE51B00B6F599 /* CameraView.swift */; };
 		F39D06D22A8DE55200B6F599 /* ViewfinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */; };
+		F3F28E982B034B7800B4AA37 /* CameraButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureModel.swift; sourceTree = "<group>"; };
 		F39D06CF2A8DE51B00B6F599 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewfinderView.swift; sourceTree = "<group>"; };
+		F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */,
 				F39D06CF2A8DE51B00B6F599 /* CameraView.swift */,
 				F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */,
+				F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */,
 				F39D06D22A8DE55200B6F599 /* ViewfinderView.swift in Sources */,
 				F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */,
+				F3F28E982B034B7800B4AA37 /* CameraButtonsView.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,
 				F39D06D02A8DE51B00B6F599 /* CameraView.swift in Sources */,
 				F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */,

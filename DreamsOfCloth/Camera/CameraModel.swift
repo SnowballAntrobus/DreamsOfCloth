@@ -232,7 +232,6 @@ class CameraModel: NSObject {
 //        }
 //    }
     
-    
 }
 
 //extension CameraModel: AVCapturePhotoCaptureDelegate {

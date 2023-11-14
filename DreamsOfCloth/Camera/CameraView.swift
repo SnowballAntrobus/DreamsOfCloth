@@ -9,16 +9,24 @@
 import SwiftUI
 
 struct CameraView: View {
-
     @StateObject private var model = ImageCaptureModel()
+    
+    private static let barHeightFactor = 0.15
 
     var body: some View {
-        
-        GeometryReader { geometry in
-            ViewfinderView(image: $model.viewfinderImage)
+        NavigationStack {
+            GeometryReader { geometry in
+                ViewfinderView(image: $model.viewfinderImage)
+                    .overlay(alignment: .bottom) {
+                        CameraButtonsView()
+                            .frame(height: geometry.size.height * Self.barHeightFactor)
+                    }
+                    .background()
+            }
+            .task {
+                await model.camera.start()
+            }
         }
-        .task {
-            await model.camera.start()
-        }
+        .navigationTitle("Camera")
     }
 }
