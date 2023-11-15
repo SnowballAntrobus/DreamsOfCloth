@@ -9,10 +9,11 @@
 import SwiftUI
 
 struct CameraButtonsView: View {
+    @StateObject var model: ImageCaptureModel
     var body: some View {
         HStack {
             Button {
-                // fill in later
+                model.camera.takePhoto()
             } label: {
                 Label {
                     Text("Take Photo")
@@ -31,8 +32,4 @@ struct CameraButtonsView: View {
         .buttonStyle(.plain)
         .labelStyle(.iconOnly)
     }
-}
-
-#Preview {
-    CameraButtonsView()
 }

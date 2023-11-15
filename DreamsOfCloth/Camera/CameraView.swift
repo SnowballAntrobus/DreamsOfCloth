@@ -18,7 +18,7 @@ struct CameraView: View {
             GeometryReader { geometry in
                 ViewfinderView(image: $model.viewfinderImage)
                     .overlay(alignment: .bottom) {
-                        CameraButtonsView()
+                        CameraButtonsView(model: model)
                             .frame(height: geometry.size.height * Self.barHeightFactor)
                     }
                     .background()

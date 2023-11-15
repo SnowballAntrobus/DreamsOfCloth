@@ -32,6 +32,8 @@ class CameraModel: NSObject {
     
     private var addToPreviewStream: ((CIImage) -> Void)?
     
+    private var addToPhotoStream: ((AVCapturePhoto) -> Void)?
+    
     var isPreviewPaused = false
     
     lazy var previewStream: AsyncStream<CIImage> = {
@@ -40,6 +42,14 @@ class CameraModel: NSObject {
                 if !self.isPreviewPaused {
                     continuation.yield(ciImage)
                 }
+            }
+        }
+    }()
+    
+    lazy var photoStream: AsyncStream<AVCapturePhoto> = {
+        AsyncStream { continuation in
+            addToPhotoStream = { photo in
+                continuation.yield(photo)
             }
         }
     }()
@@ -197,8 +207,8 @@ class CameraModel: NSObject {
         }
     }
     
-//    func takePhoto() {
-//        guard let photoOutput = self.photoOutput else { return }
+    func takePhoto() {
+        guard let photoOutput = self.photoOutput else { return }
 //
 //        sessionQueue.async {
 //            var photoSettings = AVCapturePhotoSettings()
@@ -230,12 +240,21 @@ class CameraModel: NSObject {
 //
 //            photoOutput.capturePhoto(with: photoSettings, delegate: self)
 //        }
-//    }
+    }
     
 }
 
-//extension CameraModel: AVCapturePhotoCaptureDelegate {
-//}
+extension CameraModel: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        
+        if let error = error {
+            logger.error("Error capturing photo: \(error.localizedDescription)")
+            return
+        }
+        
+        addToPhotoStream?(photo)
+    }
+}
 
 extension CameraModel: AVCaptureVideoDataOutputSampleBufferDelegate {
     
