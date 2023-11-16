@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct ViewfinderView: View {
-    @Binding var image: Image?
+    @Binding var viewfinderImage: Image?
     
     var body: some View {
         GeometryReader { geometry in
-            if let image = image {
+            if let image = viewfinderImage {
                 image
                     .resizable()
                     .scaledToFit()
@@ -25,6 +25,6 @@ struct ViewfinderView: View {
 
 struct ViewfinderView_Previews: PreviewProvider {
     static var previews: some View {
-        ViewfinderView(image: .constant(Image(systemName: "pencil")))
+        ViewfinderView(viewfinderImage: .constant(Image(systemName: "pencil")))
     }
 }

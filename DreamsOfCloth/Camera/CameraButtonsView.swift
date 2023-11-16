@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CameraButtonsView: View {
     @StateObject var model: ImageCaptureModel
+    
     var body: some View {
         HStack {
             Button {

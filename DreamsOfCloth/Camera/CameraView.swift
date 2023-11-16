@@ -16,12 +16,25 @@ struct CameraView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ViewfinderView(image: $model.viewfinderImage)
-                    .overlay(alignment: .bottom) {
-                        CameraButtonsView(model: model)
-                            .frame(height: geometry.size.height * Self.barHeightFactor)
-                    }
-                    .background()
+                if model.thumbnailImage != nil {
+                    EditCaptureView(thumbnailImage: $model.thumbnailImage)
+                        .onAppear {
+                            model.camera.isPreviewPaused = true
+                        }
+                        .onDisappear {
+                            model.camera.isPreviewPaused = false
+                        }
+                        .overlay(alignment: .bottom) {
+                            EditCaptureButtonsView(model: model)
+                                .frame(height: geometry.size.height * Self.barHeightFactor)
+                        }
+                } else {
+                    ViewfinderView(viewfinderImage: $model.viewfinderImage)
+                        .overlay(alignment: .bottom) {
+                            CameraButtonsView(model: model)
+                                .frame(height: geometry.size.height * Self.barHeightFactor)
+                        }
+                }
             }
             .task {
                 await model.camera.start()

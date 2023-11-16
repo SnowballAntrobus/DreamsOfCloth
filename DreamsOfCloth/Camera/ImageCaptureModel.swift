@@ -48,6 +48,12 @@ final class ImageCaptureModel: ObservableObject {
         }
     }
     
+    func rejectPhoto() {
+        self.photoData = nil
+        self.thumbnailImage = nil
+        logger.debug("Rejected Photo")
+    }
+    
     private func unpackPhoto(_ photo: AVCapturePhoto) -> PhotoData? {
         guard let imageData = photo.fileDataRepresentation()
         else { return nil }
@@ -69,7 +75,6 @@ final class ImageCaptureModel: ObservableObject {
         
         return PhotoData(thumbnailImage: thumbnailImage, thumbnailSize: thumbnailSize, imageData: imageData, imageSize: imageSize)
     }
-    
     
 }
 
