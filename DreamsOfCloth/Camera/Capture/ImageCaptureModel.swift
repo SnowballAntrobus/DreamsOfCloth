@@ -13,7 +13,7 @@ import os.log
 final class ImageCaptureModel: ObservableObject {
     let camera = CameraModel()
     
-    private var photoData: PhotoData?
+    var photoData: PhotoData?
     
     @Published var viewfinderImage: Image?
     @Published var thumbnailImage: Image?
@@ -49,10 +49,10 @@ final class ImageCaptureModel: ObservableObject {
     }
     
     func rejectPhoto() {
-        self.photoData = nil
         self.thumbnailImage = nil
-        logger.debug("Rejected Photo")
+        logger.debug("Rejected photo")
     }
+
     
     private func unpackPhoto(_ photo: AVCapturePhoto) -> PhotoData? {
         guard let imageData = photo.fileDataRepresentation()
@@ -76,13 +76,6 @@ final class ImageCaptureModel: ObservableObject {
         return PhotoData(thumbnailImage: thumbnailImage, thumbnailSize: thumbnailSize, imageData: imageData, imageSize: imageSize)
     }
     
-}
-
-fileprivate struct PhotoData {
-    var thumbnailImage: Image
-    var thumbnailSize: (width: Int, height: Int)
-    var imageData: Data
-    var imageSize: (width: Int, height: Int)
 }
 
 fileprivate extension CIImage {

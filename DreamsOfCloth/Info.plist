@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This is for development purposes only to connect to local server</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to the camera to capture images of items</string>
+</dict>
 </plist>

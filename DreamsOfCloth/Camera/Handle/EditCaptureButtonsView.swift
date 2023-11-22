@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct EditCaptureButtonsView: View {
-    @StateObject var model: ImageCaptureModel
+    @StateObject var model: ImageHandlingModel
+    @Binding var thumbnailImage: Image?
+    
+    init(thumbnailImage: Binding<Image?>, photoData: Binding<PhotoData?>) {
+        _thumbnailImage = thumbnailImage
+        _model = StateObject(wrappedValue: ImageHandlingModel(photoData: photoData))
+    }
     
     var body: some View {
         HStack {
             Spacer()
             Button {
-                model.rejectPhoto()
+                thumbnailImage = nil
             } label: {
                 Label("Reject Photo", systemImage: "x.circle.fill")
                     .font(.system(size: 36, weight: .bold))

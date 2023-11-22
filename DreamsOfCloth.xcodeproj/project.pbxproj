@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F388B4EE2B0DCA33005571EA /* ImageHandlingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */; };
 		F39570232AFB451300139AF2 /* todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F39570222AFB451300139AF2 /* todo.rtf */; };
 		F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */; };
 		F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069D2A8C76AC00B6F599 /* ContentView.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingModel.swift; sourceTree = "<group>"; };
 		F39570222AFB451300139AF2 /* todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = todo.rtf; sourceTree = "<group>"; };
 		F39D06982A8C76AC00B6F599 /* DreamsOfCloth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsOfCloth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothApp.swift; sourceTree = "<group>"; };
@@ -88,6 +90,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F388B4EF2B0DCA41005571EA /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				F39D06C92A8C7E7600B6F599 /* CameraModel.swift */,
+				F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */,
+				F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */,
+				F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+		F388B4F12B0DCA75005571EA /* Handle */ = {
+			isa = PBXGroup;
+			children = (
+				F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */,
+				F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */,
+				F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */,
+			);
+			path = Handle;
+			sourceTree = "<group>";
+		};
 		F39D068F2A8C76AC00B6F599 = {
 			isa = PBXGroup;
 			children = (
@@ -150,13 +173,9 @@
 		F39D06C82A8C7DF300B6F599 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				F39D06C92A8C7E7600B6F599 /* CameraModel.swift */,
-				F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */,
+				F388B4F12B0DCA75005571EA /* Handle */,
+				F388B4EF2B0DCA41005571EA /* Capture */,
 				F39D06CF2A8DE51B00B6F599 /* CameraView.swift */,
-				F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */,
-				F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */,
-				F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */,
-				F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -300,6 +319,7 @@
 				F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,
 				F39D06D02A8DE51B00B6F599 /* CameraView.swift in Sources */,
+				F388B4EE2B0DCA33005571EA /* ImageHandlingModel.swift in Sources */,
 				F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

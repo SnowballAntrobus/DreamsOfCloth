@@ -25,7 +25,7 @@ struct CameraView: View {
                             model.camera.isPreviewPaused = false
                         }
                         .overlay(alignment: .bottom) {
-                            EditCaptureButtonsView(model: model)
+                            EditCaptureButtonsView(thumbnailImage: $model.thumbnailImage, photoData: $model.photoData)
                                 .frame(height: geometry.size.height * Self.barHeightFactor)
                         }
                 } else {
