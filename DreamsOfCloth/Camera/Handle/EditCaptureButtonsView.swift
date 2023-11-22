@@ -24,7 +24,7 @@ struct EditCaptureButtonsView: View {
             Spacer()
             
             Button {
-                model.rejectPhoto()
+//                model.pingServer()
             } label: {
                 Label("Accept Photo", systemImage: "checkmark.circle.fill")
                     .font(.system(size: 36, weight: .bold))
