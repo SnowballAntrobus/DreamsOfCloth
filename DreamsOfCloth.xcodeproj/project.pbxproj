@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F36BADB22B0F06B8006B4FD2 /* ImageNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */; };
 		F388B4EE2B0DCA33005571EA /* ImageHandlingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */; };
 		F39570232AFB451300139AF2 /* todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F39570222AFB451300139AF2 /* todo.rtf */; };
 		F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkModel.swift; sourceTree = "<group>"; };
 		F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingModel.swift; sourceTree = "<group>"; };
 		F39570222AFB451300139AF2 /* todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = todo.rtf; sourceTree = "<group>"; };
 		F39D06982A8C76AC00B6F599 /* DreamsOfCloth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsOfCloth.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +109,7 @@
 				F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */,
 				F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */,
 				F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */,
+				F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */,
 			);
 			path = Handle;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				F39D06D22A8DE55200B6F599 /* ViewfinderView.swift in Sources */,
 				F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */,
 				F3A5ED642B05C97A007DB058 /* EditCaptureView.swift in Sources */,
+				F36BADB22B0F06B8006B4FD2 /* ImageNetworkModel.swift in Sources */,
 				F3F28E982B034B7800B4AA37 /* CameraButtonsView.swift in Sources */,
 				F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,
