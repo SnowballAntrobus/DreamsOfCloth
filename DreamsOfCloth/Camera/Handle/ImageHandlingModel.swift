@@ -12,16 +12,18 @@ import os.log
 final class ImageHandlingModel: ObservableObject {
     
     private var photoData: Binding<PhotoData?>
+    private var thumbnailImage: Binding<Image?>
     private var networkModel: ImageNetworkModel
     private var inputPointsforUpload: InputPointsForUpload
     
-    init(photoData: Binding<PhotoData?>) {
+    init(photoData: Binding<PhotoData?>, thumbnailImage: Binding<Image?>) {
         self.photoData = photoData
+        self.thumbnailImage = thumbnailImage
         self.networkModel = ImageNetworkModel()
-        self.inputPointsforUpload = InputPointsForUpload(pos_points: [Point(x: 700, y: 100)], neg_points: [])
+        self.inputPointsforUpload = InputPointsForUpload(pos_points: [Point(x: 350, y: 450)], neg_points: [])
     }
     
-    func getMask() {
+    func getMask() async {
         guard let thumbnailCGIImage = self.photoData.wrappedValue?.thumbnailCGImage else {
             logger.debug("Thumbnail preview image photo data was null")
             return
@@ -33,9 +35,15 @@ final class ImageHandlingModel: ObservableObject {
         
         let uiImageOrientation = UIImage.Orientation(cgImageOrientation)
         
-        let uiImage = UIImage(cgImage: thumbnailCGIImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
+        let uiImage = await UIImage(cgImage: thumbnailCGIImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
         
-        self.networkModel.uploadImageForMask(image: uiImage, points: self.inputPointsforUpload)
+        let maskImage = await self.networkModel.uploadImageForMask(image: uiImage, points: self.inputPointsforUpload)
+        
+        logger.debug("Aquired mask from server updating UI next")
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.thumbnailImage.wrappedValue = maskImage
+        }
         
     }
     

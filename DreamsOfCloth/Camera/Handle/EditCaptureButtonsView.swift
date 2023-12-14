@@ -13,7 +13,7 @@ struct EditCaptureButtonsView: View {
     
     init(thumbnailImage: Binding<Image?>, photoData: Binding<PhotoData?>) {
         _thumbnailImage = thumbnailImage
-        _handleModel = StateObject(wrappedValue: ImageHandlingModel(photoData: photoData))
+        _handleModel = StateObject(wrappedValue: ImageHandlingModel(photoData: photoData, thumbnailImage: thumbnailImage))
     }
     
     var body: some View {
@@ -28,9 +28,11 @@ struct EditCaptureButtonsView: View {
             }
             
             Spacer()
-            
+            	
             Button {
-                handleModel.getMask()
+                Task {
+                    await handleModel.getMask()
+                }
             } label: {
                 Label("Accept Photo", systemImage: "checkmark.circle.fill")
                     .font(.system(size: 36, weight: .bold))

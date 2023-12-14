@@ -8,6 +8,7 @@
 import Foundation
 import os.log
 import UIKit
+import SwiftUI
 
 final class ImageNetworkModel: ObservableObject {
     
@@ -44,12 +45,12 @@ final class ImageNetworkModel: ObservableObject {
         task.resume()
     }
     
-    func uploadImageForMask(image: UIImage, points: InputPointsForUpload) {
+    func uploadImageForMask(image: UIImage, points: InputPointsForUpload) async -> Image? {
         let imageUploadURLString = "http://cloth.gay:8000/server/image-upload/"
         
         guard let imageUploadUrl = URL(string: imageUploadURLString) else {
-            logger.debug("Invalid URL string")
-            return
+            logger.debug("Invalid URL string for imageUploadURLString")
+            return nil
         }
         
         var jsonData: Data?
@@ -57,16 +58,16 @@ final class ImageNetworkModel: ObservableObject {
             jsonData = try JSONSerialization.data(withJSONObject: points.dictionary, options: [])
         } catch {
             logger.debug("Error encoding JSON: \(error)")
-            return
+            return nil
         }
         guard let jsonData = jsonData else {
             logger.debug("Json data was null")
-            return
+            return nil
         }
         
         guard let imageData = image.jpegData(compressionQuality: 1.0) else {
             logger.debug("No image data was created")
-            return
+            return nil
         }
         
         let boundary = "Boundary-\(UUID().uuidString)"
@@ -91,30 +92,38 @@ final class ImageNetworkModel: ObservableObject {
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
         
         request.httpBody = body
-        
-        let session = URLSession.shared
-        
-        let task = session.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                logger.debug("Error: \(error!)")
-                return
+        return await withCheckedContinuation { continuation in
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    logger.debug("Error: \(error!)")
+                    return
+                }
+                
+                guard let data = data else {
+                    logger.debug("No data received from upload image for mask")
+                    return
+                }
+                
+                let image = self.processImageDataFromServer(data)
+                continuation.resume(returning: image)
             }
-            
-            guard let data = data else {
-                logger.debug("No data received from upload image for mask")
-                return
-            }
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                //TODO: define json response format so we can log it instead of printing
-                print("Response: \(json)")
-            } catch {
-                logger.debug("Error parsing JSON: \(error)")
-            }
-            
+            task.resume()
         }
-        task.resume()
+    }
+    
+    private func processImageDataFromServer(_ data: Data) -> Image? {
+        do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+               let encodedImage = json["image_data"] as? String,
+               let imageData = Data(base64Encoded: encodedImage),
+               let uiImage = UIImage(data: imageData) {
+                    return Image(uiImage: uiImage)
+            }
+        } catch {
+            logger.debug("Error parsing JSON in image read: \(error)")
+        }
+        return nil
     }
     
     
