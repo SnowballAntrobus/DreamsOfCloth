@@ -73,7 +73,7 @@ final class ImageCaptureModel: ObservableObject {
         
         logger.debug("Unpacked photo of size:(\(imageSize.width), \(imageSize.height)) and thumbnail of size:(\(thumbnailSize.width), \(thumbnailSize.height))")
         
-        return PhotoData(thumbnailImage: thumbnailImage, thumbnailSize: thumbnailSize, imageData: imageData, imageSize: imageSize)
+        return PhotoData(thumbnailImage: thumbnailImage, thumbnailCGImage: previewCGIImage, thumbnailSize: thumbnailSize, imageOrientation: cgImageOrientation, imageData: imageData, imageSize: imageSize)
     }
     
 }

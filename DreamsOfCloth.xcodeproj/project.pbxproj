@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F36BADB22B0F06B8006B4FD2 /* ImageNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */; };
 		F388B4EE2B0DCA33005571EA /* ImageHandlingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */; };
-		F39570232AFB451300139AF2 /* todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F39570222AFB451300139AF2 /* todo.rtf */; };
 		F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */; };
 		F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069D2A8C76AC00B6F599 /* ContentView.swift */; };
 		F39D06A02A8C76AD00B6F599 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39D069F2A8C76AD00B6F599 /* Assets.xcassets */; };
@@ -47,7 +46,6 @@
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkModel.swift; sourceTree = "<group>"; };
 		F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingModel.swift; sourceTree = "<group>"; };
-		F39570222AFB451300139AF2 /* todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = todo.rtf; sourceTree = "<group>"; };
 		F39D06982A8C76AC00B6F599 /* DreamsOfCloth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsOfCloth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothApp.swift; sourceTree = "<group>"; };
 		F39D069D2A8C76AC00B6F599 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				F39D069D2A8C76AC00B6F599 /* ContentView.swift */,
 				F39D069F2A8C76AD00B6F599 /* Assets.xcassets */,
 				F39D06A12A8C76AD00B6F599 /* Preview Content */,
-				F39570222AFB451300139AF2 /* todo.rtf */,
 			);
 			path = DreamsOfCloth;
 			sourceTree = "<group>";
@@ -288,7 +285,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39D06A32A8C76AD00B6F599 /* Preview Assets.xcassets in Resources */,
-				F39570232AFB451300139AF2 /* todo.rtf in Resources */,
 				F39D06A02A8C76AD00B6F599 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

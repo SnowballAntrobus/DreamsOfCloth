@@ -9,13 +9,11 @@ import SwiftUI
 
 struct EditCaptureButtonsView: View {
     @StateObject var handleModel: ImageHandlingModel
-    @StateObject var networkModel: ImageNetworkModel
     @Binding var thumbnailImage: Image?
     
     init(thumbnailImage: Binding<Image?>, photoData: Binding<PhotoData?>) {
         _thumbnailImage = thumbnailImage
         _handleModel = StateObject(wrappedValue: ImageHandlingModel(photoData: photoData))
-        _networkModel = StateObject(wrappedValue: ImageNetworkModel())
     }
     
     var body: some View {
@@ -32,7 +30,7 @@ struct EditCaptureButtonsView: View {
             Spacer()
             
             Button {
-                networkModel.pingServer()
+                handleModel.getMask()
             } label: {
                 Label("Accept Photo", systemImage: "checkmark.circle.fill")
                     .font(.system(size: 36, weight: .bold))
