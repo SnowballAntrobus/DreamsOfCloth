@@ -8,19 +8,14 @@
 import SwiftUI
 
 struct EditCaptureButtonsView: View {
-    @StateObject var handleModel: ImageHandlingModel
-    @Binding var thumbnailImage: Image?
-    
-    init(thumbnailImage: Binding<Image?>, photoData: Binding<PhotoData?>) {
-        _thumbnailImage = thumbnailImage
-        _handleModel = StateObject(wrappedValue: ImageHandlingModel(photoData: photoData, thumbnailImage: thumbnailImage))
-    }
+    var handleModel: ImageHandlingModel
+    var displayImage: Binding<Image?>
     
     var body: some View {
         HStack {
             Spacer()
             Button {
-                thumbnailImage = nil
+                handleModel.rejectImage(displayImage: displayImage)
             } label: {
                 Label("Reject Photo", systemImage: "x.circle.fill")
                     .font(.system(size: 36, weight: .bold))
@@ -31,7 +26,9 @@ struct EditCaptureButtonsView: View {
             	
             Button {
                 Task {
-                    await handleModel.getMask()
+                    let mask = await handleModel.getMask()
+                    //TODO: handle mask image is null display error to user
+                    displayImage.wrappedValue = mask
                 }
             } label: {
                 Label("Accept Photo", systemImage: "checkmark.circle.fill")

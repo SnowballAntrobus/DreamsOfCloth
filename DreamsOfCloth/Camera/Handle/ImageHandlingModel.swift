@@ -11,40 +11,37 @@ import os.log
 
 final class ImageHandlingModel: ObservableObject {
     
-    private var photoData: Binding<PhotoData?>
-    private var thumbnailImage: Binding<Image?>
+    private var photoData: PhotoData
     private var networkModel: ImageNetworkModel
     private var inputPointsforUpload: InputPointsForUpload
     
-    init(photoData: Binding<PhotoData?>, thumbnailImage: Binding<Image?>) {
+    init?(photoData: PhotoData?) {
+        guard let photoData = photoData else {
+            logger.debug("Photo data was null")
+            return nil
+        }
         self.photoData = photoData
-        self.thumbnailImage = thumbnailImage
         self.networkModel = ImageNetworkModel()
         self.inputPointsforUpload = InputPointsForUpload(pos_points: [Point(x: 350, y: 450)], neg_points: [])
     }
     
-    func getMask() async {
-        guard let thumbnailCGIImage = self.photoData.wrappedValue?.thumbnailCGImage else {
-            logger.debug("Thumbnail preview image photo data was null")
-            return
-        }
-        guard let cgImageOrientation = self.photoData.wrappedValue?.imageOrientation else {
-            logger.debug("Image orientation photo data was null")
-            return
-        }
+    func rejectImage(displayImage: Binding<Image?>) {
+        displayImage.wrappedValue = nil
+    }
+    
+    func getMask() async -> Image? {
+        let uiImageOrientation = UIImage.Orientation(self.photoData.imageOrientation)
         
-        let uiImageOrientation = UIImage.Orientation(cgImageOrientation)
-        
-        let uiImage = await UIImage(cgImage: thumbnailCGIImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
+        let uiImage = await UIImage(cgImage: self.photoData.thumbnailCGImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
         
         let maskImage = await self.networkModel.uploadImageForMask(image: uiImage, points: self.inputPointsforUpload)
         
-        logger.debug("Aquired mask from server updating UI next")
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.thumbnailImage.wrappedValue = maskImage
+        guard let maskImage = maskImage else {
+            logger.debug("Aquired null mask from server")
+            return nil
         }
         
+        return maskImage
     }
     
 }

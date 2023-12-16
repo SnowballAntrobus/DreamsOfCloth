@@ -16,17 +16,13 @@ struct CameraView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                if model.thumbnailImage != nil {
-                    EditCaptureView(thumbnailImage: $model.thumbnailImage)
+                if model.displayImage != nil {
+                    EditCaptureView(displayImage: $model.displayImage, photoData: model.photoData)
                         .onAppear {
                             model.camera.isPreviewPaused = true
                         }
                         .onDisappear {
                             model.camera.isPreviewPaused = false
-                        }
-                        .overlay(alignment: .bottom) {
-                            EditCaptureButtonsView(thumbnailImage: $model.thumbnailImage, photoData: $model.photoData)
-                                .frame(height: geometry.size.height * Self.barHeightFactor)
                         }
                 } else {
                     ViewfinderView(viewfinderImage: $model.viewfinderImage)

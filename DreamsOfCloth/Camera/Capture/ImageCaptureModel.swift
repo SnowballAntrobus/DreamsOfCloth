@@ -16,7 +16,7 @@ final class ImageCaptureModel: ObservableObject {
     var photoData: PhotoData?
     
     @Published var viewfinderImage: Image?
-    @Published var thumbnailImage: Image?
+    @Published var displayImage: Image?
     
     init() {
         Task {
@@ -41,18 +41,12 @@ final class ImageCaptureModel: ObservableObject {
         let unpackedPhotoStream = camera.photoStream.compactMap { self.unpackPhoto($0) }
         
         for await photoData in unpackedPhotoStream {
-            Task { @MainActor in
-                thumbnailImage = photoData.thumbnailImage
-            }
             self.photoData = photoData
+            Task { @MainActor in
+                displayImage = photoData.thumbnailImage
+            }
         }
     }
-    
-    func rejectPhoto() {
-        self.thumbnailImage = nil
-        logger.debug("Rejected photo")
-    }
-
     
     private func unpackPhoto(_ photo: AVCapturePhoto) -> PhotoData? {
         guard let imageData = photo.fileDataRepresentation()
