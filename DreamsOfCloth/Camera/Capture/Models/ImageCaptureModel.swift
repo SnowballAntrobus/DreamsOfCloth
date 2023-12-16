@@ -60,12 +60,13 @@ final class ImageCaptureModel: ObservableObject {
         let imageOrientation = Image.Orientation(cgImageOrientation)
         let thumbnailImage = Image(decorative: previewCGIImage, scale: 1, orientation: imageOrientation)
         
-        let previewDimensions = photo.resolvedSettings.previewDimensions
-        let thumbnailSize = (width: Int(previewDimensions.width), height: Int(previewDimensions.height))
+        // We swap height and width since that is correct accroding to orientation
+        // TODO: Is there a better way?
+        let thumbnailSize = (width: Int(previewCGIImage.height), height: Int(previewCGIImage.width))
         let photoDimensions = photo.resolvedSettings.photoDimensions
-        let imageSize = (width: Int(photoDimensions.width), height: Int(photoDimensions.height))
+        let imageSize = (width: Int(photoDimensions.height), height: Int(photoDimensions.width))
         
-        logger.debug("Unpacked photo of size:(\(imageSize.width), \(imageSize.height)) and thumbnail of size:(\(thumbnailSize.width), \(thumbnailSize.height))")
+        logger.debug("Unpacked photo of size:(width: \(imageSize.width), height: \(imageSize.height)) and thumbnail of size:(width: \(thumbnailSize.width), height: \(thumbnailSize.height)).")
         
         return PhotoData(thumbnailImage: thumbnailImage, thumbnailCGImage: previewCGIImage, thumbnailSize: thumbnailSize, imageOrientation: cgImageOrientation, imageData: imageData, imageSize: imageSize)
     }

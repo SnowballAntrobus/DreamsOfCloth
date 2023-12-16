@@ -13,7 +13,8 @@ final class ImageHandlingModel: ObservableObject {
     
     private var photoData: PhotoData
     private var networkModel: ImageNetworkModel
-    private var inputPointsforUpload: InputPointsForUpload
+    
+    @Published var inputPointsforUpload: InputPointsForUpload
     
     init?(photoData: PhotoData?) {
         guard let photoData = photoData else {
@@ -22,7 +23,19 @@ final class ImageHandlingModel: ObservableObject {
         }
         self.photoData = photoData
         self.networkModel = ImageNetworkModel()
-        self.inputPointsforUpload = InputPointsForUpload(pos_points: [Point(x: 350, y: 450)], neg_points: [])
+        self.inputPointsforUpload = InputPointsForUpload(pos_points: [], neg_points: [])
+    }
+    
+    func getImageWidth() -> Float {
+        return Float(photoData.thumbnailSize.width)
+    }
+    
+    func getImageHeight() -> Float {
+        return Float(photoData.thumbnailSize.height)
+    }
+    
+    func getAspectRatio() -> Float {
+        return Float(photoData.thumbnailSize.height) / Float(photoData.thumbnailSize.width)
     }
     
     func rejectImage(displayImage: Binding<Image?>) {
@@ -33,6 +46,8 @@ final class ImageHandlingModel: ObservableObject {
         let uiImageOrientation = UIImage.Orientation(self.photoData.imageOrientation)
         
         let uiImage = await UIImage(cgImage: self.photoData.thumbnailCGImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
+        
+        logger.debug("Sending points: \(self.inputPointsforUpload.string)")
         
         let maskImage = await self.networkModel.uploadImageForMask(image: uiImage, points: self.inputPointsforUpload)
         
@@ -70,6 +85,10 @@ struct InputPointsForUpload {
         let posPointsDict = pos_points.map { ["x": $0.x, "y": $0.y] }
         let negPointsDict = neg_points.map { ["x": $0.x, "y": $0.y] }
         return ["pos_points": posPointsDict, "neg_points": negPointsDict]
+    }
+    
+    var string: String {
+        return self.dictionary.map { "\($0.key): \($0.value)" }.joined(separator: ", ")
     }
 }
 
