@@ -90,11 +90,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F388B4EF2B0DCA41005571EA /* Capture */ = {
+		F316F39A2B2D4031001279D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */,
+				F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F316F39B2B2D403E001279D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				F39D06C92A8C7E7600B6F599 /* CameraModel.swift */,
 				F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F388B4EF2B0DCA41005571EA /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				F316F39B2B2D403E001279D3 /* Models */,
 				F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */,
 				F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */,
 			);
@@ -104,10 +121,9 @@
 		F388B4F12B0DCA75005571EA /* Handle */ = {
 			isa = PBXGroup;
 			children = (
+				F316F39A2B2D4031001279D3 /* Models */,
 				F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */,
 				F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */,
-				F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */,
-				F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */,
 			);
 			path = Handle;
 			sourceTree = "<group>";
