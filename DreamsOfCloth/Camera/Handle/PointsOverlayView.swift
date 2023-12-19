@@ -19,22 +19,27 @@ struct PointsOverlayView: View {
                 .frame(width: 18, height: 18)
                 .position(displayPosPoints[index])
                 .onTapGesture {
-                    removePoint(index: index, array: $displayPosPoints)
+                    removePoint(index: index, isPositive: true)
                 }
         }
         ForEach(0..<displayNegPoints.count, id: \.self) { index in
             Circle()
                 .fill(Color.red)
-                .frame(width: 10, height: 10)
+                .frame(width: 18, height: 18)
                 .position(displayNegPoints[index])
                 .onTapGesture {
-                    removePoint(index: index, array: $displayNegPoints)
+                    removePoint(index: index, isPositive: false)
                 }
         }
     }
     
-    func removePoint(index: Int, array: Binding<[CGPoint]>) {
-        inputPointsforUpload.pos_points.remove(at: index)
-        array.wrappedValue.remove(at: index)
+    func removePoint(index: Int, isPositive: Bool) {
+        if (isPositive) {
+            inputPointsforUpload.pos_points.remove(at: index)
+            displayPosPoints.remove(at: index)
+        } else {
+            inputPointsforUpload.neg_points.remove(at: index)
+            displayNegPoints.remove(at: index)
+        }
     }
 }

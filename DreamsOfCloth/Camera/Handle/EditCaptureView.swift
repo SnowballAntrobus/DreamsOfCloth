@@ -25,7 +25,7 @@ struct EditCaptureView: View {
         let imageHeight = handleModel.getImageHeight()
         GeometryReader { geometry in
             if let image = displayImage {
-                image
+                let imageView = image
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))
                     .contentShape(Rectangle())
@@ -47,9 +47,19 @@ struct EditCaptureView: View {
                             }
                         }
                     )
-                    .overlay(
-                        PointsOverlayView(displayPosPoints: $displayPosPoints, displayNegPoints: $displayNegPoints, inputPointsforUpload: $handleModel.inputPointsforUpload)
-                    )
+                
+                ZStack {
+                    imageView
+                    
+                    if let maskImage = handleModel.maskImage {
+                        maskImage
+                            .resizable()
+                            .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))
+                            .opacity(0.5)
+                    }
+                    
+                }
+                .overlay(PointsOverlayView(displayPosPoints: $displayPosPoints, displayNegPoints: $displayNegPoints, inputPointsforUpload: $handleModel.inputPointsforUpload))
             }
             EditCaptureButtonsView(handleModel: handleModel, displayImage: $displayImage)
                 .frame(height: geometry.size.height * 1.75)

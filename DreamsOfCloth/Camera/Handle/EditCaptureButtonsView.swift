@@ -26,9 +26,8 @@ struct EditCaptureButtonsView: View {
             	
             Button {
                 Task {
-                    let mask = await handleModel.getMask()
+                    try await handleModel.getMask()
                     //TODO: handle mask image is null display error to user
-                    displayImage.wrappedValue = mask
                 }
             } label: {
                 Label("Accept Photo", systemImage: "checkmark.circle.fill")

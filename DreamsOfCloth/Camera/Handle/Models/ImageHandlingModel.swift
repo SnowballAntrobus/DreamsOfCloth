@@ -15,6 +15,7 @@ final class ImageHandlingModel: ObservableObject {
     private var networkModel: ImageNetworkModel
     
     @Published var inputPointsforUpload: InputPointsForUpload
+    @Published var maskImage: Image?
     
     init?(photoData: PhotoData?) {
         guard let photoData = photoData else {
@@ -42,7 +43,7 @@ final class ImageHandlingModel: ObservableObject {
         displayImage.wrappedValue = nil
     }
     
-    func getMask() async -> Image? {
+    func getMask() async throws {
         let uiImageOrientation = UIImage.Orientation(self.photoData.imageOrientation)
         
         let uiImage = await UIImage(cgImage: self.photoData.thumbnailCGImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
@@ -53,12 +54,18 @@ final class ImageHandlingModel: ObservableObject {
         
         guard let maskImage = maskImage else {
             logger.debug("Aquired null mask from server")
-            return nil
+            throw MaskError.nullMaskImage
         }
         
-        return maskImage
+        await MainActor.run {
+            self.maskImage = maskImage
+        }
     }
     
+}
+
+enum MaskError: Error {
+    case nullMaskImage
 }
 
 
