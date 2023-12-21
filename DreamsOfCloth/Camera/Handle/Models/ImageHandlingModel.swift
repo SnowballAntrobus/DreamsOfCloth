@@ -14,7 +14,8 @@ final class ImageHandlingModel: ObservableObject {
     private var photoData: PhotoData
     private var networkModel: ImageNetworkModel
     
-    @Published var inputPointsforUpload: InputPointsForUpload
+    @Published var inputPointsForUpload: InputPointsForUpload
+    @Published var inputBoxForUpload: InputBoxForUpload? = InputBoxForUpload(point1: Point(x: 240, y: 385), point2: Point(x: 420, y: 555))
     @Published var maskImage: Image?
     
     init?(photoData: PhotoData?) {
@@ -24,7 +25,7 @@ final class ImageHandlingModel: ObservableObject {
         }
         self.photoData = photoData
         self.networkModel = ImageNetworkModel()
-        self.inputPointsforUpload = InputPointsForUpload(pos_points: [], neg_points: [])
+        self.inputPointsForUpload = InputPointsForUpload(pos_points: [], neg_points: [])
     }
     
     func getImageWidth() -> Float {
@@ -48,9 +49,12 @@ final class ImageHandlingModel: ObservableObject {
         
         let uiImage = await UIImage(cgImage: self.photoData.thumbnailCGImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
         
-        logger.debug("Sending points: \(self.inputPointsforUpload.string)")
+        logger.debug("Sending points: \(self.inputPointsForUpload.string)")
+        logger.debug("Sending box: \(self.inputBoxForUpload?.string ?? "No box")")
         
-        let maskImage = await self.networkModel.uploadImageForMask(image: uiImage, points: self.inputPointsforUpload)
+        let inputData = InputDataForMaskUpload(points: self.inputPointsForUpload, box: nil)
+        
+        let maskImage = await self.networkModel.uploadDataForMask(image: uiImage, data: inputData)
         
         guard let maskImage = maskImage else {
             logger.debug("Aquired null mask from server")
@@ -68,8 +72,6 @@ enum MaskError: Error {
     case nullMaskImage
 }
 
-
-
 struct PhotoData {
     var thumbnailImage: Image
     var thumbnailCGImage: CGImage
@@ -82,6 +84,10 @@ struct PhotoData {
 struct Point {
     var x: Int
     var y: Int
+    
+    var dictionary: [String: Int] {
+        return ["x": x, "y": y]
+    }
 }
 
 struct InputPointsForUpload {
@@ -89,9 +95,22 @@ struct InputPointsForUpload {
     var neg_points: [Point]
     
     var dictionary: [String: [[String: Int]]] {
-        let posPointsDict = pos_points.map { ["x": $0.x, "y": $0.y] }
-        let negPointsDict = neg_points.map { ["x": $0.x, "y": $0.y] }
+        let posPointsDict = pos_points.map { $0.dictionary }
+        let negPointsDict = neg_points.map { $0.dictionary }
         return ["pos_points": posPointsDict, "neg_points": negPointsDict]
+    }
+    
+    var string: String {
+        return self.dictionary.map { "\($0.key): \($0.value)" }.joined(separator: ", ")
+    }
+}
+
+struct InputBoxForUpload {
+    var point1: Point
+    var point2: Point
+    
+    var dictionary: [String: [String: Int]] {
+        return ["point1": point1.dictionary, "point2": point2.dictionary]
     }
     
     var string: String {

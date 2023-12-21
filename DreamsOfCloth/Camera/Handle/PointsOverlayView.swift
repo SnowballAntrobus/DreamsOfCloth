@@ -10,7 +10,7 @@ import SwiftUI
 struct PointsOverlayView: View {
     @Binding var displayPosPoints: [CGPoint]
     @Binding var displayNegPoints: [CGPoint]
-    @Binding var inputPointsforUpload: InputPointsForUpload
+    @Binding var inputPointsForUpload: InputPointsForUpload
     
     var body: some View {
         ForEach(0..<displayPosPoints.count, id: \.self) { index in
@@ -35,10 +35,10 @@ struct PointsOverlayView: View {
     
     func removePoint(index: Int, isPositive: Bool) {
         if (isPositive) {
-            inputPointsforUpload.pos_points.remove(at: index)
+            inputPointsForUpload.pos_points.remove(at: index)
             displayPosPoints.remove(at: index)
         } else {
-            inputPointsforUpload.neg_points.remove(at: index)
+            inputPointsForUpload.neg_points.remove(at: index)
             displayNegPoints.remove(at: index)
         }
     }

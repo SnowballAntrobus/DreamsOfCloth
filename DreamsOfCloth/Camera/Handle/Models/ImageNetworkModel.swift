@@ -45,7 +45,7 @@ final class ImageNetworkModel: ObservableObject {
         task.resume()
     }
     
-    func uploadImageForMask(image: UIImage, points: InputPointsForUpload) async -> Image? {
+    func uploadDataForMask(image: UIImage, data: InputDataForMaskUpload) async -> Image? {
         let imageUploadURLString = "http://cloth.gay:8000/server/image-upload/"
         
         guard let imageUploadUrl = URL(string: imageUploadURLString) else {
@@ -55,7 +55,7 @@ final class ImageNetworkModel: ObservableObject {
         
         var jsonData: Data?
         do {
-            jsonData = try JSONSerialization.data(withJSONObject: points.dictionary, options: [])
+            jsonData = try JSONSerialization.data(withJSONObject: data.dictionary(), options: [])
         } catch {
             logger.debug("Error encoding JSON: \(error)")
             return nil
@@ -125,8 +125,38 @@ final class ImageNetworkModel: ObservableObject {
         }
         return nil
     }
+}
+
+struct InputDataForMaskUpload {
+    var points: InputPointsForUpload?
+    var box: InputBoxForUpload?
     
+    init(points: InputPointsForUpload? = nil, box: InputBoxForUpload? = nil) {
+        if(points?.pos_points.count != 0 || points?.neg_points.count != 0) {
+            self.points = points
+        }
+        
+        self.box = box
+    }
     
+    func dictionary() throws -> [String: Any] {
+        if (box == nil && points == nil) {
+            throw DataForMaskError.nullBoxAndPoints
+        }
+        
+        if (box != nil && points != nil) {
+            return ["points": points!.dictionary, "box": box!.dictionary]
+        }
+        
+        guard let box = box else {
+            return ["points": points!.dictionary]
+        }
+        return ["box": box.dictionary]
+    }
+}
+
+enum DataForMaskError: Error {
+    case nullBoxAndPoints
 }
 
 

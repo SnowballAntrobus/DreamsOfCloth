@@ -40,10 +40,10 @@ struct EditCaptureView: View {
                             )
                             if isPositivePoint {
                                 self.displayPosPoints.append(tapPoint)
-                                handleModel.inputPointsforUpload.pos_points.append(newPoint)
+                                handleModel.inputPointsForUpload.pos_points.append(newPoint)
                             } else {
                                 self.displayNegPoints.append(tapPoint)
-                                handleModel.inputPointsforUpload.neg_points.append(newPoint)
+                                handleModel.inputPointsForUpload.neg_points.append(newPoint)
                             }
                         }
                     )
@@ -59,7 +59,7 @@ struct EditCaptureView: View {
                     }
                     
                 }
-                .overlay(PointsOverlayView(displayPosPoints: $displayPosPoints, displayNegPoints: $displayNegPoints, inputPointsforUpload: $handleModel.inputPointsforUpload))
+                .overlay(PointsOverlayView(displayPosPoints: $displayPosPoints, displayNegPoints: $displayNegPoints, inputPointsForUpload: $handleModel.inputPointsForUpload))
             }
             EditCaptureButtonsView(handleModel: handleModel, displayImage: $displayImage)
                 .frame(height: geometry.size.height * 1.75)
