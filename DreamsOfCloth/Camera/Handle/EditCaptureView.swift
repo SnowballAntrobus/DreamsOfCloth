@@ -10,9 +10,6 @@ import SwiftUI
 struct EditCaptureView: View {
     @StateObject var handleModel: ImageHandlingModel
     @Binding var displayImage: Image?
-    @State var isPositivePoint: Bool = true
-    @State var displayPosPoints: [CGPoint] = []
-    @State var displayNegPoints: [CGPoint] = []
     
     init(displayImage: Binding<Image?>, photoData: PhotoData?) {
         _displayImage = displayImage
@@ -21,36 +18,22 @@ struct EditCaptureView: View {
     
     var body: some View {
         let imageAspectRatio = handleModel.getAspectRatio()
-        let imageWidth = handleModel.getImageWidth()
-        let imageHeight = handleModel.getImageHeight()
         GeometryReader { geometry in
+            let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded { value in
+                let tapPoint = value.location
+                let geometryWidth = geometry.size.width
+                handleModel.addTapToPoints(tapPoint: tapPoint, geometryWidth: geometryWidth)
+            }
+            
             if let image = displayImage {
                 let imageView = image
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))
                     .contentShape(Rectangle())
-                    .gesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded { value in
-                            let tapPoint = value.location
-                            let imageX = tapPoint.x * (CGFloat(imageWidth) / geometry.size.width)
-                            let imageY = tapPoint.y * CGFloat(imageHeight) / (CGFloat(imageAspectRatio) * geometry.size.width)
-                            let newPoint = Point(
-                                x: Int(imageX > CGFloat(imageWidth) ? CGFloat(imageWidth) : imageX),
-                                y: Int(imageY > CGFloat(imageHeight) ? CGFloat(imageHeight) : imageY)
-                            )
-                            if isPositivePoint {
-                                self.displayPosPoints.append(tapPoint)
-                                handleModel.inputPointsForUpload.pos_points.append(newPoint)
-                            } else {
-                                self.displayNegPoints.append(tapPoint)
-                                handleModel.inputPointsForUpload.neg_points.append(newPoint)
-                            }
-                        }
-                    )
+                    .gesture(tapGesture)
                 
                 ZStack {
                     imageView
-                    
                     if let maskImage = handleModel.maskImage {
                         maskImage
                             .resizable()
@@ -59,13 +42,22 @@ struct EditCaptureView: View {
                     }
                     
                 }
-                .overlay(PointsOverlayView(displayPosPoints: $displayPosPoints, displayNegPoints: $displayNegPoints, inputPointsForUpload: $handleModel.inputPointsForUpload))
+                .overlay(SelectionOverlayView(handleModel: handleModel))
             }
             EditCaptureButtonsView(handleModel: handleModel, displayImage: $displayImage)
                 .frame(height: geometry.size.height * 1.75)
-            Toggle("Positive Point", isOn: $isPositivePoint)
+            Toggle("Positive Point", isOn: $handleModel.isPositivePoint)
                 .frame(height: geometry.size.height * 1.8)
                 .padding()
         }
     }
 }
+
+//                    .simultaneousGesture(
+//                        DragGesture(minimumDistance: 10, coordinateSpace: .local) .onEnded { value in
+//                            let startPoint = value.startLocation
+//                            let endPoint = value.location
+//                            let geometryWidth = geometry.size.width
+//                            handleModel.addDragAsBox(startPoint: startPoint, endPoint: endPoint, geometryWidth: geometryWidth)
+//                        }
+//                    )

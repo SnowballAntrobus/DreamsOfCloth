@@ -15,8 +15,13 @@ final class ImageHandlingModel: ObservableObject {
     private var networkModel: ImageNetworkModel
     
     @Published var inputPointsForUpload: InputPointsForUpload
-    @Published var inputBoxForUpload: InputBoxForUpload? = InputBoxForUpload(point1: Point(x: 240, y: 385), point2: Point(x: 420, y: 555))
+    @Published var inputBoxForUpload: InputBoxForUpload?
     @Published var maskImage: Image?
+    
+    @Published var isPositivePoint: Bool = true
+    @Published var displayPosPoints: [CGPoint] = []
+    @Published var displayNegPoints: [CGPoint] = []
+    @Published var displayBoxPoints: (CGPoint, CGPoint, CGPoint, CGPoint)?
     
     init?(photoData: PhotoData?) {
         guard let photoData = photoData else {
@@ -42,6 +47,61 @@ final class ImageHandlingModel: ObservableObject {
     
     func rejectImage(displayImage: Binding<Image?>) {
         displayImage.wrappedValue = nil
+    }
+    
+    func devicePointToImagePoint(devicePoint: CGPoint, deviceGeometryWidth: CGFloat) -> Point {
+        let imageWidth = self.getImageWidth()
+        let imageHeight = self.getImageHeight()
+        let imageAspectRatio = self.getAspectRatio()
+        
+        let imageX = devicePoint.x * (CGFloat(imageWidth) / deviceGeometryWidth)
+        let imageY = devicePoint.y * CGFloat(imageHeight) / (CGFloat(imageAspectRatio) * deviceGeometryWidth)
+        let newPoint = Point(
+            x: Int(imageX > CGFloat(imageWidth) ? CGFloat(imageWidth) : imageX),
+            y: Int(imageY > CGFloat(imageHeight) ? CGFloat(imageHeight) : imageY)
+        )
+        
+        return newPoint
+    }
+    
+    func addTapToPoints(tapPoint: CGPoint, geometryWidth: CGFloat) {
+        let imagePoint = devicePointToImagePoint(devicePoint: tapPoint, deviceGeometryWidth: geometryWidth)
+        if self.isPositivePoint {
+            self.displayPosPoints.append(tapPoint)
+            self.inputPointsForUpload.pos_points.append(imagePoint)
+        } else {
+            self.displayNegPoints.append(tapPoint)
+            self.inputPointsForUpload.neg_points.append(imagePoint)
+        }
+        logger.debug("Added image point: \(self.isPositivePoint ? "pos" : "neg") : \(imagePoint.dictionary)")
+        logger.debug("Added display point: \(self.isPositivePoint ? "pos" : "neg") : \(tapPoint.x) \(tapPoint.y) ")
+    }
+    
+    func removePoint(index: Int, isPositive: Bool) {
+        var point: Point? = nil
+        if (isPositive) {
+            point = self.inputPointsForUpload.pos_points.remove(at: index)
+            self.displayPosPoints.remove(at: index)
+        } else {
+            point = self.inputPointsForUpload.neg_points.remove(at: index)
+            self.displayNegPoints.remove(at: index)
+        }
+        guard let point = point else {
+            logger.debug("Removed point: no point found")
+            return
+        }
+        logger.debug("Removed point: \(point.dictionary)")
+    }
+    
+    func addDragAsBox(startPoint: CGPoint, endPoint: CGPoint, geometryWidth: CGFloat) {
+        let imagePoint1 = devicePointToImagePoint(devicePoint: startPoint, deviceGeometryWidth: geometryWidth)
+        let imagePoint2 = devicePointToImagePoint(devicePoint: endPoint, deviceGeometryWidth: geometryWidth)
+        self.inputBoxForUpload = InputBoxForUpload(point1: imagePoint1, point2: imagePoint2)
+        
+        let point3 = CGPoint(x: startPoint.x, y: endPoint.y)
+        let point4 = CGPoint(x: endPoint.x, y: startPoint.y)
+        
+        self.displayBoxPoints = (startPoint, endPoint, point3, point4)
     }
     
     func getMask() async throws {
@@ -70,15 +130,6 @@ final class ImageHandlingModel: ObservableObject {
 
 enum MaskError: Error {
     case nullMaskImage
-}
-
-struct PhotoData {
-    var thumbnailImage: Image
-    var thumbnailCGImage: CGImage
-    var thumbnailSize: (width: Int, height: Int)
-    var imageOrientation: CGImagePropertyOrientation
-    var imageData: Data
-    var imageSize: (width: Int, height: Int)
 }
 
 struct Point {

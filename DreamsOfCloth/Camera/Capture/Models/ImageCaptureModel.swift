@@ -73,6 +73,15 @@ final class ImageCaptureModel: ObservableObject {
     
 }
 
+struct PhotoData {
+    var thumbnailImage: Image
+    var thumbnailCGImage: CGImage
+    var thumbnailSize: (width: Int, height: Int)
+    var imageOrientation: CGImagePropertyOrientation
+    var imageData: Data
+    var imageSize: (width: Int, height: Int)
+}
+
 fileprivate extension CIImage {
     var image: Image? {
         let ciContext = CIContext()
