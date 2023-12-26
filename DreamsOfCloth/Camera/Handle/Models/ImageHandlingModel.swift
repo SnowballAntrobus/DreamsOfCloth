@@ -21,7 +21,7 @@ final class ImageHandlingModel: ObservableObject {
     @Published var isPositivePoint: Bool = true
     @Published var displayPosPoints: [CGPoint] = []
     @Published var displayNegPoints: [CGPoint] = []
-    @Published var displayBoxPoints: (CGPoint, CGPoint, CGPoint, CGPoint)?
+    @Published var displayBoxPoints: (CGPoint, CGPoint)?
     
     init?(photoData: PhotoData?) {
         guard let photoData = photoData else {
@@ -73,8 +73,8 @@ final class ImageHandlingModel: ObservableObject {
             self.displayNegPoints.append(tapPoint)
             self.inputPointsForUpload.neg_points.append(imagePoint)
         }
-        logger.debug("Added image point: \(self.isPositivePoint ? "pos" : "neg") : \(imagePoint.dictionary)")
-        logger.debug("Added display point: \(self.isPositivePoint ? "pos" : "neg") : \(tapPoint.x) \(tapPoint.y) ")
+        logger.debug("Added image point: \(self.isPositivePoint ? "POS" : "NEG") \(imagePoint.dictionary)")
+        logger.debug("Added display point: \(self.isPositivePoint ? "POS" : "NEG") \(tapPoint.dictionaryRepresentation)")
     }
     
     func removePoint(index: Int, isPositive: Bool) {
@@ -98,10 +98,16 @@ final class ImageHandlingModel: ObservableObject {
         let imagePoint2 = devicePointToImagePoint(devicePoint: endPoint, deviceGeometryWidth: geometryWidth)
         self.inputBoxForUpload = InputBoxForUpload(point1: imagePoint1, point2: imagePoint2)
         
-        let point3 = CGPoint(x: startPoint.x, y: endPoint.y)
-        let point4 = CGPoint(x: endPoint.x, y: startPoint.y)
+        let imageAspectRatio = self.getAspectRatio()
+        let maxImageY = CGFloat(imageAspectRatio) * geometryWidth
+        var boundedEndPoint = endPoint
+        if boundedEndPoint.y > maxImageY {
+            boundedEndPoint.y = maxImageY
+        }
         
-        self.displayBoxPoints = (startPoint, endPoint, point3, point4)
+        self.displayBoxPoints = (startPoint, boundedEndPoint)
+        logger.debug("Added image box: \(imagePoint1.dictionary) \(imagePoint2.dictionary)")
+        logger.debug("Added display box: \(self.displayBoxPoints?.0.dictionaryRepresentation) \(self.displayBoxPoints?.1.dictionaryRepresentation)")
     }
     
     func getMask() async throws {

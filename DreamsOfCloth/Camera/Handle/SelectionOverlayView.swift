@@ -29,5 +29,16 @@ struct SelectionOverlayView: View {
                     handleModel.removePoint(index: index, isPositive: false)
                 }
         }
+        
+        if let boxPoints = handleModel.displayBoxPoints {
+            let width = abs(boxPoints.0.x - boxPoints.1.x)
+            let height = abs(boxPoints.0.y - boxPoints.1.y)
+            let originX = min(boxPoints.0.x, boxPoints.1.x)
+            let originY = min(boxPoints.0.y, boxPoints.1.y)
+            Rectangle()
+                .stroke(Color.green, lineWidth: 5)
+                .frame(width: width, height: height)
+                .position(x: originX + width / 2, y: originY + height / 2)
+        }
     }
 }

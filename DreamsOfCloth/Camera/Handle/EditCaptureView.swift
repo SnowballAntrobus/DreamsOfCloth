@@ -24,13 +24,20 @@ struct EditCaptureView: View {
                 let geometryWidth = geometry.size.width
                 handleModel.addTapToPoints(tapPoint: tapPoint, geometryWidth: geometryWidth)
             }
+            let dragGesture = DragGesture(minimumDistance: 10, coordinateSpace: .local) .onEnded { value in
+                let startPoint = value.startLocation
+                let endPoint = value.location
+                let geometryWidth = geometry.size.width
+                handleModel.addDragAsBox(startPoint: startPoint, endPoint: endPoint, geometryWidth: geometryWidth)
+            }
+            let combinedGesture = dragGesture.exclusively(before: tapGesture)
             
             if let image = displayImage {
                 let imageView = image
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))
                     .contentShape(Rectangle())
-                    .gesture(tapGesture)
+                    .gesture(combinedGesture)
                 
                 ZStack {
                     imageView
@@ -52,12 +59,3 @@ struct EditCaptureView: View {
         }
     }
 }
-
-//                    .simultaneousGesture(
-//                        DragGesture(minimumDistance: 10, coordinateSpace: .local) .onEnded { value in
-//                            let startPoint = value.startLocation
-//                            let endPoint = value.location
-//                            let geometryWidth = geometry.size.width
-//                            handleModel.addDragAsBox(startPoint: startPoint, endPoint: endPoint, geometryWidth: geometryWidth)
-//                        }
-//                    )
