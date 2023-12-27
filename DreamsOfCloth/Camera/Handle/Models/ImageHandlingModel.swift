@@ -17,6 +17,7 @@ final class ImageHandlingModel: ObservableObject {
     @Published var inputPointsForUpload: InputPointsForUpload
     @Published var inputBoxForUpload: InputBoxForUpload?
     @Published var maskImage: Image?
+    @Published var fetchingMask: Bool = false
     
     @Published var isPositivePoint: Bool = true
     @Published var displayPosPoints: [CGPoint] = []
@@ -111,6 +112,9 @@ final class ImageHandlingModel: ObservableObject {
     }
     
     func getMask() async throws {
+        await MainActor.run {
+            self.fetchingMask = true
+        }
         let uiImageOrientation = UIImage.Orientation(self.photoData.imageOrientation)
         
         let uiImage = await UIImage(cgImage: self.photoData.thumbnailCGImage, scale: UIScreen.main.scale, orientation: uiImageOrientation)
@@ -129,6 +133,7 @@ final class ImageHandlingModel: ObservableObject {
         
         await MainActor.run {
             self.maskImage = maskImage
+            self.fetchingMask = false
         }
     }
     

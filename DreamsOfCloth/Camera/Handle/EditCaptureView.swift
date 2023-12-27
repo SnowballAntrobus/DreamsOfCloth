@@ -20,11 +20,13 @@ struct EditCaptureView: View {
         let imageAspectRatio = handleModel.getAspectRatio()
         GeometryReader { geometry in
             let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded { value in
+                if handleModel.fetchingMask { return }
                 let tapPoint = value.location
                 let geometryWidth = geometry.size.width
                 handleModel.addTapToPoints(tapPoint: tapPoint, geometryWidth: geometryWidth)
             }
             let dragGesture = DragGesture(minimumDistance: 10, coordinateSpace: .local) .onEnded { value in
+                if handleModel.fetchingMask { return }
                 let startPoint = value.startLocation
                 let endPoint = value.location
                 let geometryWidth = geometry.size.width
@@ -56,6 +58,7 @@ struct EditCaptureView: View {
             Toggle("Positive Point", isOn: $handleModel.isPositivePoint)
                 .frame(height: geometry.size.height * 1.8)
                 .padding()
+                .disabled(handleModel.fetchingMask)
         }
     }
 }

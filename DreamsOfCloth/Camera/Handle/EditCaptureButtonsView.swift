@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditCaptureButtonsView: View {
-    var handleModel: ImageHandlingModel
+    @ObservedObject var handleModel: ImageHandlingModel
     var displayImage: Binding<Image?>
     
     var body: some View {
@@ -20,7 +20,7 @@ struct EditCaptureButtonsView: View {
                 Label("Reject Photo", systemImage: "x.circle.fill")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.green)
-            }
+            }.disabled(handleModel.fetchingMask)
             
             Spacer()
             	
@@ -33,7 +33,8 @@ struct EditCaptureButtonsView: View {
                 Label("Accept Photo", systemImage: "checkmark.circle.fill")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.green)
-            }
+            }.disabled(handleModel.fetchingMask)
+            
             Spacer()
         }
         .buttonStyle(.plain)
