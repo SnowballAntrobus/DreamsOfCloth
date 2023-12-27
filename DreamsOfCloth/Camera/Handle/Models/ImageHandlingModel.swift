@@ -16,7 +16,7 @@ final class ImageHandlingModel: ObservableObject {
     
     @Published var inputPointsForUpload: InputPointsForUpload
     @Published var inputBoxForUpload: InputBoxForUpload?
-    @Published var maskImage: Image?
+    @Published var maskImage: UIImage? = nil
     @Published var fetchingMask: Bool = false
     
     @Published var isPositivePoint: Bool = true
@@ -97,7 +97,10 @@ final class ImageHandlingModel: ObservableObject {
     func addDragAsBox(startPoint: CGPoint, endPoint: CGPoint, geometryWidth: CGFloat) {
         let imagePoint1 = devicePointToImagePoint(devicePoint: startPoint, deviceGeometryWidth: geometryWidth)
         let imagePoint2 = devicePointToImagePoint(devicePoint: endPoint, deviceGeometryWidth: geometryWidth)
-        self.inputBoxForUpload = InputBoxForUpload(point1: imagePoint1, point2: imagePoint2)
+        // Make sure we are returning in format: top left (minX minY), bottom right (maxX maxY)
+        let topLeftPoint = Point(x: min(imagePoint1.x, imagePoint2.x), y: min(imagePoint1.y, imagePoint2.y))
+        let bottomRightPoint = Point(x: max(imagePoint1.x, imagePoint2.x), y: max(imagePoint1.y, imagePoint2.y))
+        self.inputBoxForUpload = InputBoxForUpload(point1: topLeftPoint, point2: bottomRightPoint)
         
         let imageAspectRatio = self.getAspectRatio()
         let maxImageY = CGFloat(imageAspectRatio) * geometryWidth
@@ -107,7 +110,7 @@ final class ImageHandlingModel: ObservableObject {
         }
         
         self.displayBoxPoints = (startPoint, boundedEndPoint)
-        logger.debug("Added image box: \(imagePoint1.dictionary) \(imagePoint2.dictionary)")
+        logger.debug("Added image box: \(topLeftPoint.dictionary) \(bottomRightPoint.dictionary)")
         logger.debug("Added display box: \(self.displayBoxPoints?.0.dictionaryRepresentation) \(self.displayBoxPoints?.1.dictionaryRepresentation)")
     }
     
@@ -122,7 +125,7 @@ final class ImageHandlingModel: ObservableObject {
         logger.debug("Sending points: \(self.inputPointsForUpload.string)")
         logger.debug("Sending box: \(self.inputBoxForUpload?.string ?? "No box")")
         
-        let inputData = InputDataForMaskUpload(points: self.inputPointsForUpload, box: nil)
+        let inputData = InputDataForMaskUpload(points: self.inputPointsForUpload, box: self.inputBoxForUpload)
         
         let maskImage = await self.networkModel.uploadDataForMask(image: uiImage, data: inputData)
         
@@ -135,6 +138,19 @@ final class ImageHandlingModel: ObservableObject {
             self.maskImage = maskImage
             self.fetchingMask = false
         }
+    }
+    
+    func cropItem() {
+        guard let fullSizeCaptureUIImage = UIImage(data: self.photoData.imageData) else {
+            logger.debug("Could not turn photo data into uiimage in crop")
+            return
+        }
+        guard let maskUIImage = self.maskImage else {
+            logger.debug("Mask image was null in crop")
+            return
+        }
+        
+        
     }
     
 }

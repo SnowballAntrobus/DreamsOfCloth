@@ -45,7 +45,7 @@ final class ImageNetworkModel: ObservableObject {
         task.resume()
     }
     
-    func uploadDataForMask(image: UIImage, data: InputDataForMaskUpload) async -> Image? {
+    func uploadDataForMask(image: UIImage, data: InputDataForMaskUpload) async -> UIImage? {
         let imageUploadURLString = "http://cloth.gay:8000/server/image-upload/"
         
         guard let imageUploadUrl = URL(string: imageUploadURLString) else {
@@ -112,13 +112,13 @@ final class ImageNetworkModel: ObservableObject {
         }
     }
     
-    private func processImageDataFromServer(_ data: Data) -> Image? {
+    private func processImageDataFromServer(_ data: Data) -> UIImage? {
         do {
             if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                let encodedImage = json["image_data"] as? String,
                let imageData = Data(base64Encoded: encodedImage),
                let uiImage = UIImage(data: imageData) {
-                    return Image(uiImage: uiImage)
+                    return uiImage
             }
         } catch {
             logger.debug("Error parsing JSON in image read: \(error)")

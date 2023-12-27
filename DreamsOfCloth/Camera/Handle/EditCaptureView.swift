@@ -43,7 +43,8 @@ struct EditCaptureView: View {
                 
                 ZStack {
                     imageView
-                    if let maskImage = handleModel.maskImage {
+                    if let uiMaskImage = handleModel.maskImage {
+                        let maskImage = Image(uiImage: uiMaskImage)
                         maskImage
                             .resizable()
                             .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))

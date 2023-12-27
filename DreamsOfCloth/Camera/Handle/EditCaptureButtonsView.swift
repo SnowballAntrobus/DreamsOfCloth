@@ -30,10 +30,25 @@ struct EditCaptureButtonsView: View {
                     //TODO: handle mask image is null display error to user
                 }
             } label: {
-                Label("Accept Photo", systemImage: "checkmark.circle.fill")
+                Label("Process Photo", systemImage: "play.circle")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.green)
             }.disabled(handleModel.fetchingMask)
+            
+            Spacer()
+            
+            let acceptImage = Image(systemName: "checkmark.circle.fill")
+                                .resizable()
+                                .frame(width: 36, height: 36)
+                                .foregroundColor(.green)
+            if !handleModel.fetchingMask && handleModel.maskImage != nil {
+                NavigationLink(destination: SubmitItemView()) {
+                    acceptImage
+                }
+            } else {
+                acceptImage
+                    .opacity(0.5)
+            }
             
             Spacer()
         }
