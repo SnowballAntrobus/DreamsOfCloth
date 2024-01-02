@@ -8,6 +8,8 @@
 import SwiftUI
 import AVFoundation
 import os.log
+import UIKit
+import CoreImage
 
 final class ImageHandlingModel: ObservableObject {
     
@@ -23,6 +25,8 @@ final class ImageHandlingModel: ObservableObject {
     @Published var displayPosPoints: [CGPoint] = []
     @Published var displayNegPoints: [CGPoint] = []
     @Published var displayBoxPoints: (CGPoint, CGPoint)?
+    
+    @Published var croppedItem: UIImage?
     
     init?(photoData: PhotoData?) {
         guard let photoData = photoData else {
@@ -140,17 +144,32 @@ final class ImageHandlingModel: ObservableObject {
         }
     }
     
-    func cropItem() {
+    func cropItemFullSize() {
         guard let fullSizeCaptureUIImage = UIImage(data: self.photoData.imageData) else {
             logger.debug("Could not turn photo data into uiimage in crop")
             return
         }
+        guard let reorientedFullSizeCaptureUIImage = imageWithOrientationUp(image: fullSizeCaptureUIImage) else {
+            logger.debug("Failed to reorient image in crop")
+            return
+        }
+        
         guard let maskUIImage = self.maskImage else {
             logger.debug("Mask image was null in crop")
             return
         }
+        guard let resizedMaskImage = resizeImage(image: maskUIImage, targetSize: reorientedFullSizeCaptureUIImage.size) else {
+            logger.debug("Mask resize failed in crop")
+            return
+        }
         
+        guard let result = useMaskToFilterImage(image: reorientedFullSizeCaptureUIImage, maskImage: resizedMaskImage) else {
+            logger.debug("Filter using mask failed in crop")
+            return
+        }
         
+        self.croppedItem = result
+        logger.debug("Cropped image to item")
     }
     
 }

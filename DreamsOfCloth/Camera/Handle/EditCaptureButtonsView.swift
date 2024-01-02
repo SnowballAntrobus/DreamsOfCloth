@@ -38,11 +38,11 @@ struct EditCaptureButtonsView: View {
             Spacer()
             
             let acceptImage = Image(systemName: "checkmark.circle.fill")
-                                .resizable()
-                                .frame(width: 36, height: 36)
-                                .foregroundColor(.green)
+                .resizable()
+                .frame(width: 36, height: 36)
+                .foregroundColor(.green)
             if !handleModel.fetchingMask && handleModel.maskImage != nil {
-                NavigationLink(destination: SubmitItemView()) {
+                NavigationLink(destination: SubmitItemView(handleModel: handleModel)) {
                     acceptImage
                 }
             } else {

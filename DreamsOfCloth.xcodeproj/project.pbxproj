@@ -24,6 +24,7 @@
 		F3A5ED642B05C97A007DB058 /* EditCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */; };
 		F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */; };
 		F3C251C32B3BB40300B5B71A /* SubmitItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */; };
+		F3C251C52B3CF36700B5B71A /* ImageHandlingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */; };
 		F3F28E982B034B7800B4AA37 /* CameraButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCaptureView.swift; sourceTree = "<group>"; };
 		F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCaptureButtonsView.swift; sourceTree = "<group>"; };
 		F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitItemView.swift; sourceTree = "<group>"; };
+		F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingUtil.swift; sourceTree = "<group>"; };
 		F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 			children = (
 				F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */,
 				F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */,
+				F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				F36BADB22B0F06B8006B4FD2 /* ImageNetworkModel.swift in Sources */,
 				F3C251C32B3BB40300B5B71A /* SubmitItemView.swift in Sources */,
 				F3F28E982B034B7800B4AA37 /* CameraButtonsView.swift in Sources */,
+				F3C251C52B3CF36700B5B71A /* ImageHandlingUtil.swift in Sources */,
 				F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,
 				F39D06D02A8DE51B00B6F599 /* CameraView.swift in Sources */,
