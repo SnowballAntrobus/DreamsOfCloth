@@ -131,7 +131,7 @@ final class ImageHandlingModel: ObservableObject {
         
         let inputData = InputDataForMaskUpload(points: self.inputPointsForUpload, box: self.inputBoxForUpload)
         
-        let maskImage = await self.networkModel.uploadDataForMask(image: uiImage, data: inputData)
+        let maskImage = try await self.networkModel.uploadDataForMask(image: uiImage, data: inputData)
         
         guard let maskImage = maskImage else {
             logger.debug("Aquired null mask from server")

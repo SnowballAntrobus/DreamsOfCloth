@@ -26,8 +26,13 @@ struct EditCaptureButtonsView: View {
             	
             Button {
                 Task {
-                    try await handleModel.getMask()
-                    //TODO: handle mask image is null display error to user
+                    do {
+                        try await handleModel.getMask()
+                    }
+                    catch {
+                        //TODO: display errors to user in some way
+                        handleModel.fetchingMask = false
+                    }
                 }
             } label: {
                 Label("Process Photo", systemImage: "play.circle")

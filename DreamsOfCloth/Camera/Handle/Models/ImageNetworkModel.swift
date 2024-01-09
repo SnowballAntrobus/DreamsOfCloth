@@ -45,7 +45,7 @@ final class ImageNetworkModel: ObservableObject {
         task.resume()
     }
     
-    func uploadDataForMask(image: UIImage, data: InputDataForMaskUpload) async -> UIImage? {
+    func uploadDataForMask(image: UIImage, data: InputDataForMaskUpload) async throws -> UIImage? {
         let imageUploadURLString = "http://cloth.gay:8000/server/image-upload/"
         
         guard let imageUploadUrl = URL(string: imageUploadURLString) else {
@@ -58,16 +58,16 @@ final class ImageNetworkModel: ObservableObject {
             jsonData = try JSONSerialization.data(withJSONObject: data.dictionary(), options: [])
         } catch {
             logger.debug("Error encoding JSON: \(error)")
-            return nil
+            throw MaskUploadError.jsonEncodingFailed
         }
         guard let jsonData = jsonData else {
             logger.debug("Json data was null")
-            return nil
+            throw MaskUploadError.jsonDataWasNull
         }
         
         guard let imageData = image.jpegData(compressionQuality: 1.0) else {
             logger.debug("No image data was created")
-            return nil
+            throw MaskUploadError.nullImageData
         }
         
         let boundary = "Boundary-\(UUID().uuidString)"
@@ -92,16 +92,18 @@ final class ImageNetworkModel: ObservableObject {
         body.append("--\(boundary)--\r\n".data(using: .utf8)!)
         
         request.httpBody = body
-        return await withCheckedContinuation { continuation in
+        let response: UIImage? = await withCheckedContinuation { continuation in
             let session = URLSession.shared
             let task = session.dataTask(with: request) { data, response, error in
-                guard error == nil else {
-                    logger.debug("Error: \(error!)")
+                if let error = error {
+                    logger.debug("Network Error: \(error)")
+                    continuation.resume(returning: nil)
                     return
                 }
                 
                 guard let data = data else {
                     logger.debug("No data received from upload image for mask")
+                    continuation.resume(returning: nil)
                     return
                 }
                 
@@ -110,6 +112,8 @@ final class ImageNetworkModel: ObservableObject {
             }
             task.resume()
         }
+        
+        return response
     }
     
     private func processImageDataFromServer(_ data: Data) -> UIImage? {
@@ -158,6 +162,14 @@ struct InputDataForMaskUpload {
 enum DataForMaskError: Error {
     case nullBoxAndPoints
 }
+
+enum MaskUploadError: Error {
+    case jsonEncodingFailed
+    case jsonDataWasNull
+    case nullImageData
+    case uploadError
+}
+
 
 
 fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.networkingphotos", category: "ImageNetworkModel")
