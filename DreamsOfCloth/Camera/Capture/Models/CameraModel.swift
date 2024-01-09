@@ -17,6 +17,8 @@ class CameraModel: NSObject {
     private var deviceInput: AVCaptureDeviceInput?
     private var videoOutput: AVCaptureVideoDataOutput?
     private var photoOutput: AVCapturePhotoOutput?
+    
+    private var qualityPrioritization: AVCapturePhotoOutput.QualityPrioritization = .balanced
 
     
     private var captureDevice: AVCaptureDevice? {
@@ -163,7 +165,7 @@ class CameraModel: NSObject {
         photoOutput.maxPhotoDimensions = maxPhotoDimensions
         
         // is optical image stabilization on?
-        photoOutput.maxPhotoQualityPrioritization = .quality
+        photoOutput.maxPhotoQualityPrioritization = self.qualityPrioritization
         
         let videoOutputConnection = videoOutput.connection(with: .video)
         videoOutputConnection?.isVideoMirrored = false
@@ -229,7 +231,7 @@ class CameraModel: NSObject {
                 photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPhotoPixelFormatType]
             }
 
-            photoSettings.photoQualityPrioritization = .quality
+            photoSettings.photoQualityPrioritization = self.qualityPrioritization
 
             if let photoOutputVideoConnection = photoOutput.connection(with: .video) {
                 if photoOutputVideoConnection.isVideoOrientationSupported {
