@@ -22,17 +22,13 @@ struct SubmitItemView: View {
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))
             } else {
-                Image(systemName: "pencil.tip.crop.circle")
+                //TODO: Add proper loading image
+                Image(systemName: "square.and.arrow.up.circle")
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))
-            }
-            Button {
-                handleModel.cropItemFullSize()
-            } label: {
-                Label("Crop", systemImage: "pencil.tip.crop.circle")
-                    .font(.system(size: 36, weight: .bold))
-                    .foregroundColor(.green)
-                    .frame(height: geometry.size.height * 1.8)
+                    .onAppear(perform: {
+                        handleModel.cropItemFullSize()
+                    })
             }
         }
     }
