@@ -297,6 +297,9 @@ class CameraModel: NSObject {
                 if photoOutputVideoConnection.isVideoOrientationSupported {
                     photoOutputVideoConnection.videoOrientation = self.videoOrientation
                 }
+                if photoOutputVideoConnection.isVideoMirroringSupported {
+                    photoOutputVideoConnection.isVideoMirrored = self.isUsingFrontCaptureDevice
+                }
             }
 
             photoOutput.capturePhoto(with: photoSettings, delegate: self)
