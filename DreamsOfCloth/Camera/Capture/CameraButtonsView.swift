@@ -29,6 +29,13 @@ struct CameraButtonsView: View {
                     }
                 }
             }
+            Button {
+                model.camera.switchCaptureDevice()
+            } label: {
+                Label("Switch Camera", systemImage: "arrow.triangle.2.circlepath")
+                    .font(.system(size: 36, weight: .bold))
+                    .foregroundColor(.green)
+            }
         }
         .buttonStyle(.plain)
         .labelStyle(.iconOnly)

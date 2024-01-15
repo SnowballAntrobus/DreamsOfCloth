@@ -17,15 +17,40 @@ class CameraModel: NSObject {
     private var deviceInput: AVCaptureDeviceInput?
     private var videoOutput: AVCaptureVideoDataOutput?
     private var photoOutput: AVCapturePhotoOutput?
+    private var isUsingFrontCaptureDevice = true
     
     private var qualityPrioritization: AVCapturePhotoOutput.QualityPrioritization = .balanced
 
-    
+    private var captureDevices: [AVCaptureDevice] {
+        var devices = [AVCaptureDevice]()
+        if let frontDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
+            devices += [frontDevice]
+            logger.debug("Found front capture device")
+        }
+        if let backDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
+            devices += [backDevice]
+            logger.debug("Found back capture device")
+        }
+        if devices.isEmpty {
+            logger.debug("Did not find any capture devices")
+        }
+        return devices
+    }
+
     private var captureDevice: AVCaptureDevice? {
         didSet {
             guard let captureDevice = captureDevice else { return }
             logger.debug("Using capture device: \(captureDevice.localizedName)")
+            sessionQueue.async {
+                self.updateSessionForCaptureDevice(captureDevice)
+            }
         }
+    }
+    
+    private var availableCaptureDevices: [AVCaptureDevice] {
+        captureDevices
+            .filter( { $0.isConnected } )
+            .filter( { !$0.isSuspended } )
     }
     
     var isRunning: Bool {
@@ -64,7 +89,13 @@ class CameraModel: NSObject {
     private func initialize() {
         sessionQueue = DispatchQueue(label: "Camera Session Queue")
         
-        captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+        var availableCaptureDevice = availableCaptureDevices.first
+        
+        if availableCaptureDevice == nil {
+            availableCaptureDevice = AVCaptureDevice.default(for: .video)
+            logger.debug("No available capture devices using default video instead")
+        }
+        captureDevice = availableCaptureDevice
     }
     
     private var deviceOrientation: UIDeviceOrientation = UIDeviceOrientation.portrait;
@@ -167,12 +198,41 @@ class CameraModel: NSObject {
         // is optical image stabilization on?
         photoOutput.maxPhotoQualityPrioritization = self.qualityPrioritization
         
-        let videoOutputConnection = videoOutput.connection(with: .video)
-        videoOutputConnection?.isVideoMirrored = false
+        updateVideoOutputConnection()
         
         isCaptureSessionConfigured = true
         
         success = true
+    }
+    
+    private func updateSessionForCaptureDevice(_ captureDevice: AVCaptureDevice){
+        guard isCaptureSessionConfigured else { return }
+        
+        captureSession.beginConfiguration()
+        defer { captureSession.commitConfiguration() }
+        
+        for input in captureSession.inputs {
+            if let deviceInput = input as? AVCaptureDeviceInput {
+                captureSession.removeInput(deviceInput)
+            }
+        }
+        
+        if let deviceInput = deviceInputFor(captureDevice) {
+            if !captureSession.inputs.contains(deviceInput), captureSession.canAddInput(deviceInput) {
+                captureSession.addInput(deviceInput)
+            }
+        }
+        
+        updateVideoOutputConnection()
+    }
+    
+    private func updateVideoOutputConnection() {
+        if let videoOutput = videoOutput, let videoOutputConnection =
+            videoOutput.connection(with: .video) {
+            if videoOutputConnection.isVideoMirroringSupported {
+                videoOutputConnection.isVideoMirrored = self.isUsingFrontCaptureDevice
+            }
+        }
     }
     
     func start() async {
@@ -240,6 +300,18 @@ class CameraModel: NSObject {
             }
 
             photoOutput.capturePhoto(with: photoSettings, delegate: self)
+        }
+    }
+    
+    func switchCaptureDevice() {
+        if let captureDevice = captureDevice, let index = availableCaptureDevices.firstIndex(of: captureDevice) {
+            let nextIndex = (index + 1) % availableCaptureDevices.count
+            self.isUsingFrontCaptureDevice = !self.isUsingFrontCaptureDevice
+            logger.debug("Switching capture device to \(self.isUsingFrontCaptureDevice ? "front" : "back")")
+            self.captureDevice = availableCaptureDevices[nextIndex]
+        } else {
+            self.captureDevice = AVCaptureDevice.default(for: .video)
+            logger.debug("Could not find next capture device using default video instead")
         }
     }
     
