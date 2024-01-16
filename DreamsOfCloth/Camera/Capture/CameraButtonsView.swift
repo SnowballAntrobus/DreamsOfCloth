@@ -10,11 +10,18 @@ import SwiftUI
 
 struct CameraButtonsView: View {
     @ObservedObject var model: ImageCaptureModel
+    @State private var countdown: Int
+    
+    init(model: ImageCaptureModel) {
+        self.model = model
+        self.countdown = Int(model.timerForFrontPictureLength)
+    }
     
     var body: some View {
         HStack {
             Button {
-                model.camera.takePhoto()
+                model.captureImage()
+                startCountdown()
             } label: {
                 Label {
                     Text("Take Photo")
@@ -26,6 +33,11 @@ struct CameraButtonsView: View {
                         Circle()
                             .fill(.green)
                             .frame(width: 50, height: 50)
+                        if model.isUsingFrontCamera {
+                            Text("\(countdown)")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                        }
                     }
                 }
             }
@@ -39,5 +51,16 @@ struct CameraButtonsView: View {
         }
         .buttonStyle(.plain)
         .labelStyle(.iconOnly)
+    }
+    
+    func startCountdown() {
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if self.countdown > 0 {
+                self.countdown -= 1
+            } else {
+                timer.invalidate()
+                self.countdown = Int(self.model.timerForFrontPictureLength)
+            }
+        }
     }
 }

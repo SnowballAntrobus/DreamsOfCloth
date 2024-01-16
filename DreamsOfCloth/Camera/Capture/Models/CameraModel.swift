@@ -17,7 +17,7 @@ class CameraModel: NSObject {
     private var deviceInput: AVCaptureDeviceInput?
     private var videoOutput: AVCaptureVideoDataOutput?
     private var photoOutput: AVCapturePhotoOutput?
-    private var isUsingFrontCaptureDevice = true
+    var isUsingFrontCaptureDevice = true
     
     private var qualityPrioritization: AVCapturePhotoOutput.QualityPrioritization = .balanced
 

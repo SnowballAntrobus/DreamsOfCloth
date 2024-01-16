@@ -18,6 +18,8 @@ final class ImageCaptureModel: ObservableObject {
     @Published var viewfinderImage: Image?
     @Published var displayImage: Image?
     @Published var isSwitchingCaptureDevice: Bool = false
+    @Published var isUsingFrontCamera: Bool = true
+    let timerForFrontPictureLength: Double = 3.0
     
     init() {
         Task {
@@ -26,10 +28,22 @@ final class ImageCaptureModel: ObservableObject {
         Task {
             await handleCameraPhotos()
         }
+        isUsingFrontCamera = camera.isUsingFrontCaptureDevice
+    }
+    
+    func captureImage() {
+        if isUsingFrontCamera {
+            DispatchQueue.main.asyncAfter(deadline: .now() + timerForFrontPictureLength) {
+                self.camera.takePhoto()
+            }
+        } else {
+            camera.takePhoto()
+        }
     }
     
     func switchCamera() {
-        self.isSwitchingCaptureDevice = true
+        isSwitchingCaptureDevice = true
+        self.isUsingFrontCamera = !self.isUsingFrontCamera
         camera.switchCaptureDevice()
         //TODO: Consider change to delegate strategy so that we can have as short a delay as possible
         // Used to prevent visual glitch when device input is changed
