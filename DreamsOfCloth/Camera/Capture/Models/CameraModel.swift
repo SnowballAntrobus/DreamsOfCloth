@@ -25,14 +25,12 @@ class CameraModel: NSObject {
         var devices = [AVCaptureDevice]()
         if let frontDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
             devices += [frontDevice]
-            logger.debug("Found front capture device")
         }
         if let backDevice = AVCaptureDevice.default(.builtInDualCamera, for: .video, position: .back) {
             devices += [backDevice]
-            logger.debug("Found back capture device")
         }
-        if devices.isEmpty {
-            logger.debug("Did not find any capture devices")
+        if devices.isEmpty || devices.count == 1 {
+            logger.debug("Only found capture device: \(devices.first?.localizedName ?? "none")")
         }
         return devices
     }

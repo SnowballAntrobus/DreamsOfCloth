@@ -31,7 +31,11 @@ final class ImageCaptureModel: ObservableObject {
     func switchCamera() {
         self.isSwitchingCaptureDevice = true
         camera.switchCaptureDevice()
-        self.isSwitchingCaptureDevice = false
+        //TODO: Consider change to delegate strategy so that we can have as short a delay as possible
+        // Used to prevent visual glitch when device input is changed
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.isSwitchingCaptureDevice = false
+        }
     }
     
     func handleCameraPreviews() async {
