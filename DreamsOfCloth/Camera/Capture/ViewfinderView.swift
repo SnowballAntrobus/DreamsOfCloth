@@ -10,21 +10,24 @@ import SwiftUI
 
 struct ViewfinderView: View {
     @Binding var viewfinderImage: Image?
+    @Binding var isSwitchingCaptureDevice: Bool
     
     var body: some View {
         GeometryReader { geometry in
             if let image = viewfinderImage {
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
+                if !isSwitchingCaptureDevice {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                } else {
+                    //TODO: Switch to be something interesting maybe same as other loading screens
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                }
             }
         }
-    }
-}
-
-struct ViewfinderView_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewfinderView(viewfinderImage: .constant(Image(systemName: "pencil")))
     }
 }

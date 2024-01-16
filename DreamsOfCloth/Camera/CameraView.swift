@@ -25,7 +25,7 @@ struct CameraView: View {
                             model.camera.isPreviewPaused = false
                         }
                 } else {
-                    ViewfinderView(viewfinderImage: $model.viewfinderImage)
+                    ViewfinderView(viewfinderImage: $model.viewfinderImage, isSwitchingCaptureDevice: $model.isSwitchingCaptureDevice)
                         .overlay(alignment: .bottom) {
                             CameraButtonsView(model: model)
                                 .frame(height: geometry.size.height * Self.barHeightFactor)

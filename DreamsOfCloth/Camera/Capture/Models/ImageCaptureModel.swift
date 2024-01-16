@@ -17,6 +17,7 @@ final class ImageCaptureModel: ObservableObject {
     
     @Published var viewfinderImage: Image?
     @Published var displayImage: Image?
+    @Published var isSwitchingCaptureDevice: Bool = false
     
     init() {
         Task {
@@ -25,6 +26,12 @@ final class ImageCaptureModel: ObservableObject {
         Task {
             await handleCameraPhotos()
         }
+    }
+    
+    func switchCamera() {
+        self.isSwitchingCaptureDevice = true
+        camera.switchCaptureDevice()
+        self.isSwitchingCaptureDevice = false
     }
     
     func handleCameraPreviews() async {
