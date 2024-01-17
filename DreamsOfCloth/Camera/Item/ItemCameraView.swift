@@ -1,5 +1,5 @@
 //
-//  CameraView.swift
+//  ItemCameraView.swift
 //  DreamsOfCloth
 //
 //  Adapted by Dante Gil-Marin on 8/16/23 from:
@@ -8,10 +8,8 @@
 
 import SwiftUI
 
-struct CameraView: View {
-    @StateObject private var model = ImageCaptureModel()
-    
-    private static let barHeightFactor = 0.15
+struct ItemCameraView: View {
+    @StateObject private var model = ItemCaptureModel()
 
     var body: some View {
         NavigationStack {
@@ -26,10 +24,8 @@ struct CameraView: View {
                         }
                 } else {
                     ViewfinderView(viewfinderImage: $model.viewfinderImage, isSwitchingCaptureDevice: $model.isSwitchingCaptureDevice)
-                        .overlay(alignment: .bottom) {
-                            CameraButtonsView(model: model)
-                                .frame(height: geometry.size.height * Self.barHeightFactor)
-                        }
+                    CameraButtonsView(model: model)
+                        .frame(height: geometry.size.height * 1.8)
                 }
             }
             .task {

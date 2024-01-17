@@ -10,7 +10,7 @@ import SwiftUI
 import AVFoundation
 import os.log
 
-final class ImageCaptureModel: ObservableObject {
+class ImageCaptureModel: ObservableObject {
     let camera = CameraModel()
     
     var photoData: PhotoData?
@@ -52,7 +52,7 @@ final class ImageCaptureModel: ObservableObject {
         }
     }
     
-    func handleCameraPreviews() async {
+    open func handleCameraPreviews() async {
         let imageStream = camera.previewStream.map{ $0.image }
         
         for await image in imageStream {

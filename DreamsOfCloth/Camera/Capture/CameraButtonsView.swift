@@ -19,6 +19,7 @@ struct CameraButtonsView: View {
     
     var body: some View {
         HStack {
+            Spacer()
             Button {
                 model.captureImage()
                 startCountdown()
@@ -48,6 +49,7 @@ struct CameraButtonsView: View {
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.green)
             }
+            Spacer()
         }
         .buttonStyle(.plain)
         .labelStyle(.iconOnly)
