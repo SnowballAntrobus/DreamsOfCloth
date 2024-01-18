@@ -1,5 +1,5 @@
 //
-//  CameraButtonsView.swift
+//  ItemCameraButtonsView.swift
 //  DreamsOfCloth
 //
 //  Adapted by Dante Gil-Marin on 11/13/23 from:
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CameraButtonsView: View {
+struct ItemCameraButtonsView: View {
     @ObservedObject var model: ImageCaptureModel
     @State private var countdown: Int
     

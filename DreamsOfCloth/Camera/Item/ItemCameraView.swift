@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ItemCameraView: View {
-    @StateObject private var model = ItemCaptureModel()
+    @StateObject private var model: ItemCaptureModel = ItemCaptureModel()
 
     var body: some View {
         NavigationStack {
@@ -23,8 +23,10 @@ struct ItemCameraView: View {
                             model.camera.isPreviewPaused = false
                         }
                 } else {
-                    ViewfinderView(viewfinderImage: $model.viewfinderImage, isSwitchingCaptureDevice: $model.isSwitchingCaptureDevice)
-                    CameraButtonsView(model: model)
+                    ItemViewfinderView(viewfinderImage: $model.viewfinderImage, isSwitchingCaptureDevice: $model.isSwitchingCaptureDevice, poseModel: model.poseDetectionModel)
+                        .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(model.getViewfinderImageAspectRatio()))
+                    
+                    ItemCameraButtonsView(model: model)
                         .frame(height: geometry.size.height * 1.8)
                 }
             }

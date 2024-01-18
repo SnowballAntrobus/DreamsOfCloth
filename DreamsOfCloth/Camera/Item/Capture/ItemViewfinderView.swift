@@ -1,5 +1,5 @@
 //
-//  ViewfinderView.swift
+//  ItemViewfinderView.swift
 //  DreamsOfCloth
 //
 //  Adapted by Dante Gil-Marin on 8/16/23 from:
@@ -8,9 +8,10 @@
 
 import SwiftUI
 
-struct ViewfinderView: View {
+struct ItemViewfinderView: View {
     @Binding var viewfinderImage: Image?
     @Binding var isSwitchingCaptureDevice: Bool
+    @ObservedObject var poseModel: PoseDetectionModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -18,8 +19,7 @@ struct ViewfinderView: View {
                 if !isSwitchingCaptureDevice {
                     image
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .overlay(PosePointsOverlayView(parentWidth: geometry.size.width, parentHeight: geometry.size.height, poseModel: poseModel))
                 } else {
                     //TODO: Switch to be something interesting maybe same as other loading screens
                     Image(systemName: "arrow.triangle.2.circlepath")

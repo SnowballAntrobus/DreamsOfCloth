@@ -132,7 +132,7 @@ class CameraModel: NSObject {
         }
     }
     
-    private func getMaxPhotoDimensions() -> CMVideoDimensions? {
+    func getMaxPhotoDimensions() -> CMVideoDimensions? {
         guard let captureDevice = captureDevice else {
             logger.error("Capture device is nil when getting max dimensions")
             return nil
@@ -140,7 +140,6 @@ class CameraModel: NSObject {
         
         let captureDeviceFormat = captureDevice.activeFormat
         let maxPhotoDimensions = captureDeviceFormat.supportedMaxPhotoDimensions[0]
-        logger.debug("Max photo dimensions: (\(maxPhotoDimensions.width), \(maxPhotoDimensions.height))")
         
         return maxPhotoDimensions
     }

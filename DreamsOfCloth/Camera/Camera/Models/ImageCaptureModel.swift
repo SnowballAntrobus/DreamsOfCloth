@@ -31,6 +31,15 @@ class ImageCaptureModel: ObservableObject {
         isUsingFrontCamera = camera.isUsingFrontCaptureDevice
     }
     
+    func getViewfinderImageAspectRatio() -> Float {
+        let size = self.camera.getMaxPhotoDimensions()
+        guard let size = size else {
+            logger.debug("Could not get viewfinder image aspect ratio")
+            return 1.333333
+        }
+        return Float(size.width) / Float(size.height)
+    }
+    
     func captureImage() {
         if isUsingFrontCamera {
             DispatchQueue.main.asyncAfter(deadline: .now() + timerForFrontPictureLength) {

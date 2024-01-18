@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F301310B2B58D304009D102E /* PosePointsOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301310A2B58D304009D102E /* PosePointsOverlayView.swift */; };
 		F316F39F2B2D6B1D001279D3 /* SelectionOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */; };
 		F31CCE392B579BC400EF6664 /* PoseDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */; };
 		F31CCE3D2B579CB300EF6664 /* ItemCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */; };
@@ -22,12 +23,12 @@
 		F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06C92A8C7E7600B6F599 /* CameraModel.swift */; };
 		F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */; };
 		F39D06D02A8DE51B00B6F599 /* ItemCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06CF2A8DE51B00B6F599 /* ItemCameraView.swift */; };
-		F39D06D22A8DE55200B6F599 /* ViewfinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */; };
+		F39D06D22A8DE55200B6F599 /* ItemViewfinderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D06D12A8DE55200B6F599 /* ItemViewfinderView.swift */; };
 		F3A5ED642B05C97A007DB058 /* EditCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */; };
 		F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */; };
 		F3C251C32B3BB40300B5B71A /* SubmitItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */; };
 		F3C251C52B3CF36700B5B71A /* ImageHandlingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */; };
-		F3F28E982B034B7800B4AA37 /* CameraButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */; };
+		F3F28E982B034B7800B4AA37 /* ItemCameraButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F28E972B034B7800B4AA37 /* ItemCameraButtonsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F301310A2B58D304009D102E /* PosePointsOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosePointsOverlayView.swift; sourceTree = "<group>"; };
 		F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionOverlayView.swift; sourceTree = "<group>"; };
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseDetectionModel.swift; sourceTree = "<group>"; };
@@ -67,12 +69,12 @@
 		F39D06C92A8C7E7600B6F599 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		F39D06CB2A8DC56600B6F599 /* ImageCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCaptureModel.swift; sourceTree = "<group>"; };
 		F39D06CF2A8DE51B00B6F599 /* ItemCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCameraView.swift; sourceTree = "<group>"; };
-		F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewfinderView.swift; sourceTree = "<group>"; };
+		F39D06D12A8DE55200B6F599 /* ItemViewfinderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewfinderView.swift; sourceTree = "<group>"; };
 		F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCaptureView.swift; sourceTree = "<group>"; };
 		F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCaptureButtonsView.swift; sourceTree = "<group>"; };
 		F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitItemView.swift; sourceTree = "<group>"; };
 		F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingUtil.swift; sourceTree = "<group>"; };
-		F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonsView.swift; sourceTree = "<group>"; };
+		F3F28E972B034B7800B4AA37 /* ItemCameraButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCameraButtonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F301310C2B58DF5B009D102E /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				F39D06D12A8DE55200B6F599 /* ItemViewfinderView.swift */,
+				F3F28E972B034B7800B4AA37 /* ItemCameraButtonsView.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+		F301310D2B58DFF1009D102E /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				F316F39B2B2D403E001279D3 /* Models */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		F301310E2B58E0F5009D102E /* Submit */ = {
+			isa = PBXGroup;
+			children = (
+				F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */,
+			);
+			path = Submit;
+			sourceTree = "<group>";
+		};
 		F316F39A2B2D4031001279D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,8 +166,10 @@
 			isa = PBXGroup;
 			children = (
 				F31CCE3B2B579C7A00EF6664 /* Models */,
-				F39D06CF2A8DE51B00B6F599 /* ItemCameraView.swift */,
+				F301310C2B58DF5B009D102E /* Capture */,
+				F301310E2B58E0F5009D102E /* Submit */,
 				F388B4F12B0DCA75005571EA /* Handle */,
+				F39D06CF2A8DE51B00B6F599 /* ItemCameraView.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -153,16 +182,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F388B4EF2B0DCA41005571EA /* Capture */ = {
-			isa = PBXGroup;
-			children = (
-				F316F39B2B2D403E001279D3 /* Models */,
-				F39D06D12A8DE55200B6F599 /* ViewfinderView.swift */,
-				F3F28E972B034B7800B4AA37 /* CameraButtonsView.swift */,
-			);
-			path = Capture;
-			sourceTree = "<group>";
-		};
 		F388B4F12B0DCA75005571EA /* Handle */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,7 +189,6 @@
 				F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */,
 				F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */,
 				F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */,
-				F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */,
 			);
 			path = Handle;
 			sourceTree = "<group>";
@@ -238,7 +256,8 @@
 			children = (
 				F31CCE3A2B579BEF00EF6664 /* Item */,
 				F31CCE362B579AC100EF6664 /* PoseDetection */,
-				F388B4EF2B0DCA41005571EA /* Capture */,
+				F301310A2B58D304009D102E /* PosePointsOverlayView.swift */,
+				F301310D2B58DFF1009D102E /* Camera */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -374,7 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */,
-				F39D06D22A8DE55200B6F599 /* ViewfinderView.swift in Sources */,
+				F39D06D22A8DE55200B6F599 /* ItemViewfinderView.swift in Sources */,
 				F31CCE392B579BC400EF6664 /* PoseDetectionModel.swift in Sources */,
 				F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */,
 				F316F39F2B2D6B1D001279D3 /* SelectionOverlayView.swift in Sources */,
@@ -382,7 +401,8 @@
 				F3A5ED642B05C97A007DB058 /* EditCaptureView.swift in Sources */,
 				F36BADB22B0F06B8006B4FD2 /* ImageNetworkModel.swift in Sources */,
 				F3C251C32B3BB40300B5B71A /* SubmitItemView.swift in Sources */,
-				F3F28E982B034B7800B4AA37 /* CameraButtonsView.swift in Sources */,
+				F3F28E982B034B7800B4AA37 /* ItemCameraButtonsView.swift in Sources */,
+				F301310B2B58D304009D102E /* PosePointsOverlayView.swift in Sources */,
 				F3C251C52B3CF36700B5B71A /* ImageHandlingUtil.swift in Sources */,
 				F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,

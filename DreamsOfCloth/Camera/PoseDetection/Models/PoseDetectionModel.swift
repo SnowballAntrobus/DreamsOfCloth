@@ -38,6 +38,7 @@ final class PoseDetectionModel: ObservableObject {
         }
         
         if observations.isEmpty {
+            posePoints = PosePoints()
             return
         }
         
@@ -85,7 +86,6 @@ final class PoseDetectionModel: ObservableObject {
             }
         }
         posePoints = newPosePoints
-        logger.debug("\(self.posePoints.string)")
     }
 }
 
