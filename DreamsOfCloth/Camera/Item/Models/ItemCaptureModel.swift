@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import os.log
 
 final class ItemCaptureModel: ImageCaptureModel {
     @Published var poseDetectionModel: PoseDetectionModel
@@ -28,6 +29,23 @@ final class ItemCaptureModel: ImageCaptureModel {
             }
         }
     }
+    
+    override func handleCameraPhotos() async {
+        let unpackedPhotoStream = camera.photoStream.compactMap { self.unpackPhoto($0) }
+        
+        for await photoData in unpackedPhotoStream {
+            self.photoData = photoData
+            Task { @MainActor in
+                guard let fullSizeCaptureUIImage = UIImage(data: photoData.imageData), let fullSizeCaptureCGImage = fullSizeCaptureUIImage.cgImage else {
+                    logger.debug("Could not turn photo data into cgimage for pose detection in item capture")
+                    return
+                }
+                poseDetectionModel.performBodyPoseRequest(fullSizeCaptureCGImage)
+                displayImage = photoData.thumbnailImage
+            }
+            logger.debug("Found pose points: \(self.poseDetectionModel.posePoints.allPoints)")
+        }
+    }
 }
 
 fileprivate extension CIImage {
@@ -37,3 +55,5 @@ fileprivate extension CIImage {
         return cgImage
     }
 }
+
+fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.capturingitem", category: "ItemCaptureModel")

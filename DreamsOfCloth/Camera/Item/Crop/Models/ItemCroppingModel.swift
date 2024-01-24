@@ -1,5 +1,5 @@
 //
-//  ImageHandlingModel.swift
+//  ItemCroppingModel.swift
 //  DreamsOfCloth
 //
 //  Created by Dante Gil-Marin on 11/21/23.
@@ -11,10 +11,10 @@ import os.log
 import UIKit
 import CoreImage
 
-final class ImageHandlingModel: ObservableObject {
+final class ItemCroppingModel: ObservableObject {
     
     private var photoData: PhotoData
-    private var networkModel: ImageNetworkModel
+    private var networkModel: ItemCropNetworkModel
     
     @Published var inputPointsForUpload: InputPointsForUpload
     @Published var inputBoxForUpload: InputBoxForUpload?
@@ -34,7 +34,7 @@ final class ImageHandlingModel: ObservableObject {
             return nil
         }
         self.photoData = photoData
-        self.networkModel = ImageNetworkModel()
+        self.networkModel = ItemCropNetworkModel()
         self.inputPointsForUpload = InputPointsForUpload(pos_points: [], neg_points: [])
     }
     
@@ -231,4 +231,4 @@ fileprivate extension UIImage.Orientation {
     }
 }
 
-fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.handlingphotos", category: "ImageHandlingModel")
+fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.cropitem", category: "ItemCroppingModel")

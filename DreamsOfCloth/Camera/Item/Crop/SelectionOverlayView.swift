@@ -8,29 +8,29 @@
 import SwiftUI
 
 struct SelectionOverlayView: View {
-    @ObservedObject var handleModel: ImageHandlingModel
+    @ObservedObject var cropModel: ItemCroppingModel
     
     var body: some View {
-        ForEach(0..<handleModel.displayPosPoints.count, id: \.self) { index in
+        ForEach(0..<cropModel.displayPosPoints.count, id: \.self) { index in
             Circle()
                 .fill(Color.green)
                 .frame(width: 18, height: 18)
-                .position(handleModel.displayPosPoints[index])
+                .position(cropModel.displayPosPoints[index])
                 .onTapGesture {
-                    handleModel.removePoint(index: index, isPositive: true)
+                    cropModel.removePoint(index: index, isPositive: true)
                 }
         }
-        ForEach(0..<handleModel.displayNegPoints.count, id: \.self) { index in
+        ForEach(0..<cropModel.displayNegPoints.count, id: \.self) { index in
             Circle()
                 .fill(Color.red)
                 .frame(width: 18, height: 18)
-                .position(handleModel.displayNegPoints[index])
+                .position(cropModel.displayNegPoints[index])
                 .onTapGesture {
-                    handleModel.removePoint(index: index, isPositive: false)
+                    cropModel.removePoint(index: index, isPositive: false)
                 }
         }
         
-        if let boxPoints = handleModel.displayBoxPoints {
+        if let boxPoints = cropModel.displayBoxPoints {
             let width = abs(boxPoints.0.x - boxPoints.1.x)
             let height = abs(boxPoints.0.y - boxPoints.1.y)
             let originX = min(boxPoints.0.x, boxPoints.1.x)

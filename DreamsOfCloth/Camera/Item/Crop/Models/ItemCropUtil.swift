@@ -1,5 +1,5 @@
 //
-//  ImageHandlingUtil.swift
+//  ItemCropUtil.swift
 //  DreamsOfCloth
 //
 //  Created by Dante Gil-Marin on 12/27/23.
@@ -64,4 +64,4 @@ func useMaskToFilterImage(image: UIImage, maskImage: UIImage) -> UIImage? {
     return UIImage(cgImage: newImage)
 }
 
-fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.handlingphotos", category: "ImageHandlingUtils")
+fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.cropitem", category: "ItemCropUtils")

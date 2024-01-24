@@ -11,8 +11,9 @@
 		F316F39F2B2D6B1D001279D3 /* SelectionOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */; };
 		F31CCE392B579BC400EF6664 /* PoseDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */; };
 		F31CCE3D2B579CB300EF6664 /* ItemCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */; };
-		F36BADB22B0F06B8006B4FD2 /* ImageNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */; };
-		F388B4EE2B0DCA33005571EA /* ImageHandlingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */; };
+		F362508F2B60EAB8004AE2CD /* ItemCropNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F362508E2B60EAB8004AE2CD /* ItemCropNetworkModel.swift */; };
+		F36250912B60EB7B004AE2CD /* ItemCropUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36250902B60EB7B004AE2CD /* ItemCropUtil.swift */; };
+		F388B4EE2B0DCA33005571EA /* ItemCroppingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388B4ED2B0DCA33005571EA /* ItemCroppingModel.swift */; };
 		F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */; };
 		F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39D069D2A8C76AC00B6F599 /* ContentView.swift */; };
 		F39D06A02A8C76AD00B6F599 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F39D069F2A8C76AD00B6F599 /* Assets.xcassets */; };
@@ -27,7 +28,6 @@
 		F3A5ED642B05C97A007DB058 /* EditCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */; };
 		F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */; };
 		F3C251C32B3BB40300B5B71A /* SubmitItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */; };
-		F3C251C52B3CF36700B5B71A /* ImageHandlingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */; };
 		F3F28E982B034B7800B4AA37 /* ItemCameraButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F28E972B034B7800B4AA37 /* ItemCameraButtonsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,8 +54,9 @@
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseDetectionModel.swift; sourceTree = "<group>"; };
 		F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCaptureModel.swift; sourceTree = "<group>"; };
-		F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkModel.swift; sourceTree = "<group>"; };
-		F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingModel.swift; sourceTree = "<group>"; };
+		F362508E2B60EAB8004AE2CD /* ItemCropNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCropNetworkModel.swift; sourceTree = "<group>"; };
+		F36250902B60EB7B004AE2CD /* ItemCropUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCropUtil.swift; sourceTree = "<group>"; };
+		F388B4ED2B0DCA33005571EA /* ItemCroppingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCroppingModel.swift; sourceTree = "<group>"; };
 		F39D06982A8C76AC00B6F599 /* DreamsOfCloth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DreamsOfCloth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsOfClothApp.swift; sourceTree = "<group>"; };
 		F39D069D2A8C76AC00B6F599 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,7 +74,6 @@
 		F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCaptureView.swift; sourceTree = "<group>"; };
 		F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCaptureButtonsView.swift; sourceTree = "<group>"; };
 		F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitItemView.swift; sourceTree = "<group>"; };
-		F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHandlingUtil.swift; sourceTree = "<group>"; };
 		F3F28E972B034B7800B4AA37 /* ItemCameraButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCameraButtonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,9 +130,9 @@
 		F316F39A2B2D4031001279D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F36BADB12B0F06B8006B4FD2 /* ImageNetworkModel.swift */,
-				F388B4ED2B0DCA33005571EA /* ImageHandlingModel.swift */,
-				F3C251C42B3CF36700B5B71A /* ImageHandlingUtil.swift */,
+				F388B4ED2B0DCA33005571EA /* ItemCroppingModel.swift */,
+				F362508E2B60EAB8004AE2CD /* ItemCropNetworkModel.swift */,
+				F36250902B60EB7B004AE2CD /* ItemCropUtil.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,8 +167,8 @@
 			children = (
 				F31CCE3B2B579C7A00EF6664 /* Models */,
 				F301310C2B58DF5B009D102E /* Capture */,
+				F3F2CF322B60E99600E6C0A7 /* Crop */,
 				F301310E2B58E0F5009D102E /* Submit */,
-				F388B4F12B0DCA75005571EA /* Handle */,
 				F39D06CF2A8DE51B00B6F599 /* ItemCameraView.swift */,
 			);
 			path = Item;
@@ -180,17 +180,6 @@
 				F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		F388B4F12B0DCA75005571EA /* Handle */ = {
-			isa = PBXGroup;
-			children = (
-				F316F39A2B2D4031001279D3 /* Models */,
-				F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */,
-				F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */,
-				F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */,
-			);
-			path = Handle;
 			sourceTree = "<group>";
 		};
 		F39D068F2A8C76AC00B6F599 = {
@@ -260,6 +249,17 @@
 				F301310D2B58DFF1009D102E /* Camera */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		F3F2CF322B60E99600E6C0A7 /* Crop */ = {
+			isa = PBXGroup;
+			children = (
+				F316F39A2B2D4031001279D3 /* Models */,
+				F3A5ED632B05C97A007DB058 /* EditCaptureView.swift */,
+				F3A5ED652B05D888007DB058 /* EditCaptureButtonsView.swift */,
+				F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */,
+			);
+			path = Crop;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -399,15 +399,15 @@
 				F316F39F2B2D6B1D001279D3 /* SelectionOverlayView.swift in Sources */,
 				F31CCE3D2B579CB300EF6664 /* ItemCaptureModel.swift in Sources */,
 				F3A5ED642B05C97A007DB058 /* EditCaptureView.swift in Sources */,
-				F36BADB22B0F06B8006B4FD2 /* ImageNetworkModel.swift in Sources */,
+				F362508F2B60EAB8004AE2CD /* ItemCropNetworkModel.swift in Sources */,
 				F3C251C32B3BB40300B5B71A /* SubmitItemView.swift in Sources */,
 				F3F28E982B034B7800B4AA37 /* ItemCameraButtonsView.swift in Sources */,
+				F36250912B60EB7B004AE2CD /* ItemCropUtil.swift in Sources */,
 				F301310B2B58D304009D102E /* PosePointsOverlayView.swift in Sources */,
-				F3C251C52B3CF36700B5B71A /* ImageHandlingUtil.swift in Sources */,
 				F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,
 				F39D06D02A8DE51B00B6F599 /* ItemCameraView.swift in Sources */,
-				F388B4EE2B0DCA33005571EA /* ImageHandlingModel.swift in Sources */,
+				F388B4EE2B0DCA33005571EA /* ItemCroppingModel.swift in Sources */,
 				F39D06CA2A8C7E7600B6F599 /* CameraModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

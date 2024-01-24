@@ -71,7 +71,7 @@ class ImageCaptureModel: ObservableObject {
         }
     }
     
-    func handleCameraPhotos() async {
+    open func handleCameraPhotos() async {
         let unpackedPhotoStream = camera.photoStream.compactMap { self.unpackPhoto($0) }
         
         for await photoData in unpackedPhotoStream {
@@ -82,7 +82,7 @@ class ImageCaptureModel: ObservableObject {
         }
     }
     
-    private func unpackPhoto(_ photo: AVCapturePhoto) -> PhotoData? {
+    func unpackPhoto(_ photo: AVCapturePhoto) -> PhotoData? {
         guard let imageData = photo.fileDataRepresentation()
         else { return nil }
         

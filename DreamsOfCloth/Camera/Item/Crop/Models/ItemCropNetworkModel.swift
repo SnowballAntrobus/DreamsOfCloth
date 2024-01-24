@@ -1,5 +1,5 @@
 //
-//  ImageNetworkModel.swift
+//  ItemCropNetworkModel.swift
 //  DreamsOfCloth
 //
 //  Created by Dante Gil-Marin on 11/22/23.
@@ -10,7 +10,7 @@ import os.log
 import UIKit
 import SwiftUI
 
-final class ImageNetworkModel: ObservableObject {
+final class ItemCropNetworkModel: ObservableObject {
     
     func pingServer() {
         let pingUrlString = "http://cloth.gay:8000/server/print-message/"
@@ -172,4 +172,4 @@ enum MaskUploadError: Error {
 
 
 
-fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.networkingphotos", category: "ImageNetworkModel")
+fileprivate let logger = Logger(subsystem: "com.musa.DreamsOfCloth.cropitem", category: "ItemCropNetworkModel")

@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct SubmitItemView: View {
-    @ObservedObject var handleModel: ImageHandlingModel
+    @ObservedObject var cropModel: ItemCroppingModel
     
-    init(handleModel: ImageHandlingModel) {
-        self.handleModel = handleModel
+    init(cropModel: ItemCroppingModel) {
+        self.cropModel = cropModel
     }
     var body: some View {
-        let imageAspectRatio = handleModel.getAspectRatio()
+        let imageAspectRatio = cropModel.getAspectRatio()
         GeometryReader { geometry in
-            if let uiItemImage = handleModel.croppedItem {
+            if let uiItemImage = cropModel.croppedItem {
                 let itemImage = Image(uiImage: uiItemImage)
                 itemImage
                     .resizable()
@@ -27,7 +27,7 @@ struct SubmitItemView: View {
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.width * CGFloat(imageAspectRatio))
                     .onAppear(perform: {
-                        handleModel.cropItemFullSize()
+                        cropModel.cropItemFullSize()
                     })
             }
         }

@@ -8,37 +8,37 @@
 import SwiftUI
 
 struct EditCaptureButtonsView: View {
-    @ObservedObject var handleModel: ImageHandlingModel
+    @ObservedObject var cropModel: ItemCroppingModel
     var displayImage: Binding<Image?>
     
     var body: some View {
         HStack {
             Spacer()
             Button {
-                handleModel.rejectImage(displayImage: displayImage)
+                cropModel.rejectImage(displayImage: displayImage)
             } label: {
                 Label("Reject Photo", systemImage: "x.circle.fill")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.green)
-            }.disabled(handleModel.fetchingMask)
+            }.disabled(cropModel.fetchingMask)
             
             Spacer()
             	
             Button {
                 Task {
                     do {
-                        try await handleModel.getMask()
+                        try await cropModel.getMask()
                     }
                     catch {
                         //TODO: display errors to user in some way
-                        handleModel.fetchingMask = false
+                        cropModel.fetchingMask = false
                     }
                 }
             } label: {
                 Label("Process Photo", systemImage: "play.circle")
                     .font(.system(size: 36, weight: .bold))
                     .foregroundColor(.green)
-            }.disabled(handleModel.fetchingMask)
+            }.disabled(cropModel.fetchingMask)
             
             Spacer()
             
@@ -46,8 +46,8 @@ struct EditCaptureButtonsView: View {
                 .resizable()
                 .frame(width: 36, height: 36)
                 .foregroundColor(.green)
-            if !handleModel.fetchingMask && handleModel.maskImage != nil {
-                NavigationLink(destination: SubmitItemView(handleModel: handleModel)) {
+            if !cropModel.fetchingMask && cropModel.maskImage != nil {
+                NavigationLink(destination: SubmitItemView(cropModel: cropModel)) {
                     acceptImage
                 }
             } else {
