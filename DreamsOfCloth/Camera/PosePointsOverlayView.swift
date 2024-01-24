@@ -13,14 +13,19 @@ struct PosePointsOverlayView: View {
     @ObservedObject var poseModel: PoseDetectionModel
     
     var body: some View {
-        let neckPoint = poseModel.posePoints.neck?.0
-        if neckPoint != nil {
-            let viewPoint = convertImagePointToViewPoint(point: neckPoint!)
-            if viewPoint != nil {
-                Circle()
-                    .fill(Color.blue)
-                    .frame(width: 10, height: 10)
-                    .position(viewPoint!)
+        ForEach(poseModel.posePoints.allPoints, id:\.0) { point in
+            if let cgPoint = point.1 {
+                if let viewPoint = convertImagePointToViewPoint(point: cgPoint) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.blue)
+                            .frame(width: 20, height: 20)
+                        Text(point.0)
+                            .foregroundColor(.white)
+                            .font(.caption)
+                    }
+                    .position(x: viewPoint.x, y: viewPoint.y)
+                }
             }
         }
     }
@@ -31,10 +36,6 @@ struct PosePointsOverlayView: View {
         }
         let newHeight = (point.y * parentHeight) / CGFloat(imageHeight)
         let newWidth = (point.x * parentWidth) / CGFloat(imageWidth)
-        print("currentHeight: \(point.y), currentWdith: \(point.x)")
-        print("parentHeight: \(parentHeight), parentWidth: \(parentWidth)")
-        print("imageHeight: \(imageHeight), imageWidth: \(imageWidth)")
-        print("newHeight: \(newHeight), newWidth: \(newWidth)")
         return CGPoint(x: newWidth, y: newHeight)
     }
 }
