@@ -11,6 +11,7 @@
 		F316F39F2B2D6B1D001279D3 /* SelectionOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */; };
 		F31CCE392B579BC400EF6664 /* PoseDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */; };
 		F31CCE3D2B579CB300EF6664 /* ItemCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */; };
+		F35CA2C32B62395000A7ED3B /* GlobalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35CA2C22B62395000A7ED3B /* GlobalSettings.swift */; };
 		F362508F2B60EAB8004AE2CD /* ItemCropNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F362508E2B60EAB8004AE2CD /* ItemCropNetworkModel.swift */; };
 		F36250912B60EB7B004AE2CD /* ItemCropUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36250902B60EB7B004AE2CD /* ItemCropUtil.swift */; };
 		F388B4EE2B0DCA33005571EA /* ItemCroppingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F388B4ED2B0DCA33005571EA /* ItemCroppingModel.swift */; };
@@ -54,6 +55,7 @@
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseDetectionModel.swift; sourceTree = "<group>"; };
 		F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCaptureModel.swift; sourceTree = "<group>"; };
+		F35CA2C22B62395000A7ED3B /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
 		F362508E2B60EAB8004AE2CD /* ItemCropNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCropNetworkModel.swift; sourceTree = "<group>"; };
 		F36250902B60EB7B004AE2CD /* ItemCropUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCropUtil.swift; sourceTree = "<group>"; };
 		F388B4ED2B0DCA33005571EA /* ItemCroppingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCroppingModel.swift; sourceTree = "<group>"; };
@@ -116,7 +118,8 @@
 			children = (
 				F316F39B2B2D403E001279D3 /* Models */,
 			);
-			path = Camera;
+			name = Camera;
+			path = Camera/Camera;
 			sourceTree = "<group>";
 		};
 		F301310E2B58E0F5009D102E /* Submit */ = {
@@ -150,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				F31CCE372B579AD000EF6664 /* Models */,
+				F301310A2B58D304009D102E /* PosePointsOverlayView.swift */,
 			);
 			path = PoseDetection;
 			sourceTree = "<group>";
@@ -182,6 +186,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F35CA2C12B6238E000A7ED3B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F35CA2C22B62395000A7ED3B /* GlobalSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F39D068F2A8C76AC00B6F599 = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +218,10 @@
 			isa = PBXGroup;
 			children = (
 				F31CA9B42A946A6C001A9807 /* Info.plist */,
-				F39D06C82A8C7DF300B6F599 /* Camera */,
+				F35CA2C12B6238E000A7ED3B /* Models */,
+				F31CCE3A2B579BEF00EF6664 /* Item */,
+				F31CCE362B579AC100EF6664 /* PoseDetection */,
+				F301310D2B58DFF1009D102E /* Camera */,
 				F39D069B2A8C76AC00B6F599 /* DreamsOfClothApp.swift */,
 				F39D069D2A8C76AC00B6F599 /* ContentView.swift */,
 				F39D069F2A8C76AD00B6F599 /* Assets.xcassets */,
@@ -238,17 +253,6 @@
 				F39D06B82A8C76AD00B6F599 /* DreamsOfClothUITestsLaunchTests.swift */,
 			);
 			path = DreamsOfClothUITests;
-			sourceTree = "<group>";
-		};
-		F39D06C82A8C7DF300B6F599 /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				F31CCE3A2B579BEF00EF6664 /* Item */,
-				F31CCE362B579AC100EF6664 /* PoseDetection */,
-				F301310A2B58D304009D102E /* PosePointsOverlayView.swift */,
-				F301310D2B58DFF1009D102E /* Camera */,
-			);
-			path = Camera;
 			sourceTree = "<group>";
 		};
 		F3F2CF322B60E99600E6C0A7 /* Crop */ = {
@@ -403,6 +407,7 @@
 				F3C251C32B3BB40300B5B71A /* SubmitItemView.swift in Sources */,
 				F3F28E982B034B7800B4AA37 /* ItemCameraButtonsView.swift in Sources */,
 				F36250912B60EB7B004AE2CD /* ItemCropUtil.swift in Sources */,
+				F35CA2C32B62395000A7ED3B /* GlobalSettings.swift in Sources */,
 				F301310B2B58D304009D102E /* PosePointsOverlayView.swift in Sources */,
 				F3A5ED662B05D888007DB058 /* EditCaptureButtonsView.swift in Sources */,
 				F39D06CC2A8DC56600B6F599 /* ImageCaptureModel.swift in Sources */,

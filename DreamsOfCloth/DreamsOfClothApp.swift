@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct DreamsOfClothApp: App {
+    var globalSettings = GlobalSettings()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(globalSettings)
         }
     }
 }
