@@ -10,10 +10,12 @@ import SwiftUI
 struct EditCaptureView: View {
     @StateObject var cropModel: ItemCroppingModel
     @Binding var displayImage: Image?
+    var posePoints: PosePoints
     
-    init(displayImage: Binding<Image?>, photoData: PhotoData?) {
+    init(displayImage: Binding<Image?>, photoData: PhotoData?, posePoints: PosePoints) {
         _displayImage = displayImage
         _cropModel = StateObject(wrappedValue: ItemCroppingModel(photoData: photoData)!)
+        self.posePoints = posePoints
     }
     
     var body: some View {
@@ -54,7 +56,7 @@ struct EditCaptureView: View {
                 }
                 .overlay(SelectionOverlayView(cropModel: cropModel))
             }
-            EditCaptureButtonsView(cropModel: cropModel, displayImage: $displayImage)
+            EditCaptureButtonsView(cropModel: cropModel, posePoints: posePoints, displayImage: $displayImage)
                 .frame(height: geometry.size.height * 1.75)
             Toggle("Positive Point", isOn: $cropModel.isPositivePoint)
                 .frame(height: geometry.size.height * 1.8)

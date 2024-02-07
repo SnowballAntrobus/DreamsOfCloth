@@ -40,6 +40,8 @@ final class ItemCaptureModel: ImageCaptureModel {
                     logger.debug("Could not turn photo data into cgimage for pose detection in item capture")
                     return
                 }
+                // Keep in mind that the actual poseModel that is passed to submitView will not be this since there is a delay in stopping handleCameraPreviews (3 runs)
+                // but the data should still be good since it is such a small difference in timing
                 poseDetectionModel.performBodyPoseRequest(fullSizeCaptureCGImage)
                 displayImage = photoData.thumbnailImage
             }

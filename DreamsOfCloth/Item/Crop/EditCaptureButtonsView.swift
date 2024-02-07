@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct EditCaptureButtonsView: View {
+    @EnvironmentObject var globalSettings: GlobalSettings
     @ObservedObject var cropModel: ItemCroppingModel
+    var posePoints: PosePoints
     var displayImage: Binding<Image?>
+    
+    @State private var croppedImage: UIImage? = UIImage()
     
     var body: some View {
         HStack {
@@ -47,8 +51,14 @@ struct EditCaptureButtonsView: View {
                 .frame(width: 36, height: 36)
                 .foregroundColor(.green)
             if !cropModel.fetchingMask && cropModel.maskImage != nil {
-                NavigationLink(destination: SubmitItemView(cropModel: cropModel)) {
+                NavigationLink(value: croppedImage) {
                     acceptImage
+                }
+                .simultaneousGesture(TapGesture().onEnded {
+                    self.croppedImage = cropModel.cropItemFullSize()
+                })
+                .navigationDestination(for: UIImage.self) { image in
+                    SubmitItemView(aspectRatio: cropModel.getAspectRatio(), croppedItem: image, posePoints: posePoints, realDistanceBetweenEyesInCm: globalSettings.distanceBetweenEyesInCm)
                 }
             } else {
                 acceptImage

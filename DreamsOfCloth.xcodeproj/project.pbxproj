@@ -11,6 +11,7 @@
 		F316F39F2B2D6B1D001279D3 /* SelectionOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316F39E2B2D6B1D001279D3 /* SelectionOverlayView.swift */; };
 		F31CCE392B579BC400EF6664 /* PoseDetectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */; };
 		F31CCE3D2B579CB300EF6664 /* ItemCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */; };
+		F31E51272B73462D00ED0450 /* SubmitItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31E51262B73462D00ED0450 /* SubmitItemModel.swift */; };
 		F35CA2C32B62395000A7ED3B /* GlobalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35CA2C22B62395000A7ED3B /* GlobalSettings.swift */; };
 		F362508F2B60EAB8004AE2CD /* ItemCropNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F362508E2B60EAB8004AE2CD /* ItemCropNetworkModel.swift */; };
 		F36250912B60EB7B004AE2CD /* ItemCropUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36250902B60EB7B004AE2CD /* ItemCropUtil.swift */; };
@@ -55,6 +56,7 @@
 		F31CA9B42A946A6C001A9807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F31CCE382B579BC400EF6664 /* PoseDetectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseDetectionModel.swift; sourceTree = "<group>"; };
 		F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCaptureModel.swift; sourceTree = "<group>"; };
+		F31E51262B73462D00ED0450 /* SubmitItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitItemModel.swift; sourceTree = "<group>"; };
 		F35CA2C22B62395000A7ED3B /* GlobalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalSettings.swift; sourceTree = "<group>"; };
 		F362508E2B60EAB8004AE2CD /* ItemCropNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCropNetworkModel.swift; sourceTree = "<group>"; };
 		F36250902B60EB7B004AE2CD /* ItemCropUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCropUtil.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		F301310E2B58E0F5009D102E /* Submit */ = {
 			isa = PBXGroup;
 			children = (
+				F31E51232B7345BD00ED0450 /* Models */,
 				F3C251C22B3BB40300B5B71A /* SubmitItemView.swift */,
 			);
 			path = Submit;
@@ -182,6 +185,14 @@
 			isa = PBXGroup;
 			children = (
 				F31CCE3C2B579CB300EF6664 /* ItemCaptureModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F31E51232B7345BD00ED0450 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F31E51262B73462D00ED0450 /* SubmitItemModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -399,6 +410,7 @@
 				F39D069E2A8C76AC00B6F599 /* ContentView.swift in Sources */,
 				F39D06D22A8DE55200B6F599 /* ItemViewfinderView.swift in Sources */,
 				F31CCE392B579BC400EF6664 /* PoseDetectionModel.swift in Sources */,
+				F31E51272B73462D00ED0450 /* SubmitItemModel.swift in Sources */,
 				F39D069C2A8C76AC00B6F599 /* DreamsOfClothApp.swift in Sources */,
 				F316F39F2B2D6B1D001279D3 /* SelectionOverlayView.swift in Sources */,
 				F31CCE3D2B579CB300EF6664 /* ItemCaptureModel.swift in Sources */,

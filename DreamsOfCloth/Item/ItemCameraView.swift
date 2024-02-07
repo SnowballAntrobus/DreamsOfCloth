@@ -15,7 +15,7 @@ struct ItemCameraView: View {
         NavigationStack {
             GeometryReader { geometry in
                 if model.displayImage != nil {
-                    EditCaptureView(displayImage: $model.displayImage, photoData: model.photoData)
+                    EditCaptureView(displayImage: $model.displayImage, photoData: model.photoData, posePoints: model.poseDetectionModel.posePoints)
                         .onAppear {
                             model.camera.isPreviewPaused = true
                         }
